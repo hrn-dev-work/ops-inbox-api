@@ -8,6 +8,7 @@ coverage/
 logs/
 dumps/
 *.sql
+!prisma/migrations/**/*.sql
 *.dump
 *.backup
 *.bak
