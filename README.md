@@ -14,7 +14,7 @@ Full research run (private): https://github.com/hrn-dev-work/cursor-dotfiles/blo
 | Public API | [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) ([/docs](https://ops-inbox-api.onrender.com/docs)) — Render; deploy: [docs/en/deploy-render.md](./docs/en/deploy-render.md) |
 
 Japanese: see below.  
-Agent glossary: [CONTEXT.md](./CONTEXT.md) · Conventions: [docs/en/conventions.md](./docs/en/conventions.md) · Human setup: [docs/en/getting-started.md](./docs/en/getting-started.md)
+Why this repo: [docs/en/purpose.md](./docs/en/purpose.md) · Agent glossary: [CONTEXT.md](./CONTEXT.md) · Conventions: [docs/en/conventions.md](./docs/en/conventions.md) · Human setup: [docs/en/getting-started.md](./docs/en/getting-started.md)
 
 Local docs: `http://localhost:3000/docs` · Hosted: [https://ops-inbox-api.onrender.com/docs](https://ops-inbox-api.onrender.com/docs)
 
@@ -140,7 +140,7 @@ MIT
 | 公開 API | [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com)（[/docs](https://ops-inbox-api.onrender.com/docs)）— Render · [docs/ja/deploy-render.md](./docs/ja/deploy-render.md) |
 
 English: see above.  
-用語・制約: [CONTEXT.md](./CONTEXT.md) · 規約: [docs/ja/conventions.md](./docs/ja/conventions.md) · 起動手順: [docs/ja/getting-started.md](./docs/ja/getting-started.md)
+目的: [docs/ja/purpose.md](./docs/ja/purpose.md) · 用語・制約: [CONTEXT.md](./CONTEXT.md) · 規約: [docs/ja/conventions.md](./docs/ja/conventions.md) · 起動手順: [docs/ja/getting-started.md](./docs/ja/getting-started.md)
 
 ローカル docs: `http://localhost:3000/docs` · ホスト: [https://ops-inbox-api.onrender.com/docs](https://ops-inbox-api.onrender.com/docs)
 

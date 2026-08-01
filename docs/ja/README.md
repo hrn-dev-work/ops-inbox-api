@@ -7,6 +7,7 @@
 
 同一ファイルに英語と日本語を混ぜないでください。方針: `docs-language` スキル（`~/.cursor/skills/docs-language`）。
 
+- [目的（なぜこのリポか）](./purpose.md) — ポートフォリオ目的・デモ手順・非目標
 - [はじめに](./getting-started.md) — このアプリリポでの最初の 1 時間
 - [規約](./conventions.md) — ドキュメント言語・安全・品質ゲート・スキル
 - [Render デプロイ](./deploy-render.md) — S1 公開 API（Blueprint）

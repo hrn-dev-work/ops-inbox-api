@@ -2,6 +2,8 @@
 
 NestJS portfolio sample: **idempotent webhook ingest → ops inbox → one outbound notify** (mock by default) per Research card **S1** (`extend`).
 
+**Why (human):** [docs/en/purpose.md](docs/en/purpose.md) · [docs/ja/purpose.md](docs/ja/purpose.md) — freelance proposal proof, not an end-user product.
+
 Strategy (private GitHub): https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/portfolio-automation-strategy.md  
 Research card S1 (in-repo): [docs/en/sample-card-s1.md](docs/en/sample-card-s1.md)  
 Research run (private GitHub): https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/research-runs/2026-08-01.md

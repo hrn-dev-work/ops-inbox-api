@@ -7,6 +7,7 @@ Japanese human guides: `docs/ja/`.
 
 Do **not** mix English and Japanese in one file. Layout policy: `docs-language` skill (`~/.cursor/skills/docs-language`).
 
+- [Purpose (why this repo)](./purpose.md) — portfolio goal, demo script, non-goals
 - [Getting started](./getting-started.md) — first hour in this app repo
 - [Conventions](./conventions.md) — handbook: docs language, safety, quality gates, skills
 - [Deploy on Render](./deploy-render.md) — S1 public API (Blueprint)
