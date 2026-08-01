@@ -70,13 +70,14 @@ NestJS 11 · Prisma 6 · PostgreSQL 16（Docker Compose）· REST + OpenAPI。
 
 ## 未完了（S1）
 
-ホストした **公開 API URL** は未決定（Render / Railway 等。DoD 完了宣言の前に決める）。
+ホストした **公開 API URL** — [deploy-render.md](./deploy-render.md) でデプロイし、live smoke 後に DoD を Yes にする。
 
 ---
 
 ## 関連
 
 - [はじめに](./getting-started.md)
+- [Render デプロイ](./deploy-render.md)
 - [ローカル DB](./local-database.md)
 - [ローカル seed](./local-seed.md)
 - [レビュー](./reviews.md)

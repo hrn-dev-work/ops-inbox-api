@@ -70,13 +70,14 @@ Reviews explainer: [reviews.md](./reviews.md)
 
 ## Still open (S1)
 
-Hosted **public API URL** is not chosen yet (Render vs Railway — decide before claiming DoD complete).
+Hosted **public API URL** — deploy with [deploy-render.md](./deploy-render.md), then mark DoD Yes after live smoke.
 
 ---
 
 ## Related guides
 
 - [Getting started](./getting-started.md)
+- [Deploy on Render](./deploy-render.md)
 - [Local database](./local-database.md)
 - [Local seed](./local-seed.md)
 - [Reviews](./reviews.md)

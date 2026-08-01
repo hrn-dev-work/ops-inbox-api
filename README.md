@@ -11,7 +11,7 @@ Full research run (private): https://github.com/hrn-dev-work/cursor-dotfiles/blo
 | Stack | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI ([ADR 0001](./docs/adr/0001-nestjs-prisma-backend.md)) |
 | Problem | Providers retry webhooks; naive handlers create duplicate tickets |
 | Result so far | HMAC + idempotent ingest + outbound mock recorded on inbox + Swagger |
-| S1 still open | Hosted public API URL (GitHub repo is public) |
+| S1 still open | Hosted public API URL — [docs/en/deploy-render.md](./docs/en/deploy-render.md) |
 
 Japanese: [README.ja.md](./README.ja.md)  
 Agent glossary: [CONTEXT.md](./CONTEXT.md) · Conventions: [docs/en/conventions.md](./docs/en/conventions.md) · Human setup: [docs/en/getting-started.md](./docs/en/getting-started.md)

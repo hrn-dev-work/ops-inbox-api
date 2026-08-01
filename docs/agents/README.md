@@ -19,6 +19,7 @@ Read in this order before non-trivial implementation:
 |-----|---------|
 | [Standard stack](./stack.md) | NestJS / Prisma / Postgres (ADR 0001); multi-agent SSOT |
 | [Conventions](./conventions.md) | Consolidated rules: docs, safety, review, CI, skills |
+| [Deploy (en)](../en/deploy-render.md) | Render Blueprint for S1 public API |
 | [Skill set](./skill-set.md) | Sample skills + Cursor skills / rules / hooks inventory |
 | [Domain consumer rules](./domain.md) | How to read and update `CONTEXT.md` / ADRs |
 | [Reviews (en)](../en/reviews.md) | 7-stage implementation-review; report under `docs/reviews/` |

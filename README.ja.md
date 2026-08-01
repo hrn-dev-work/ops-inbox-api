@@ -12,7 +12,7 @@
 | スタック | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI（[ADR 0001](./docs/adr/0001-nestjs-prisma-backend.md)） |
 | 課題 | プロバイダ再送でチケットが二重になる |
 | いまできていること | HMAC + 冪等受信 + outbound モック記録 + Swagger |
-| S1 未着手 | ホストした公開 API URL（GitHub は公開済み） |
+| S1 未着手 | 公開 API URL — [docs/ja/deploy-render.md](./docs/ja/deploy-render.md) |
 
 English: [README.md](./README.md)  
 用語・制約: [CONTEXT.md](./CONTEXT.md) · 規約: [docs/ja/conventions.md](./docs/ja/conventions.md) · 起動手順: [docs/ja/getting-started.md](./docs/ja/getting-started.md)

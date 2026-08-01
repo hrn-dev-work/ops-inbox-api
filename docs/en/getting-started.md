@@ -27,3 +27,4 @@ npm run start:dev
 - Local seed details: [local-seed.md](./local-seed.md)
 - AI context exclusions: root `.cursorignore`
 - Secret audit: `npm run secret:audit` (optional hooks: `bash scripts/install-git-hooks.sh`)
+- Deploy (S1 public URL): [deploy-render.md](./deploy-render.md)

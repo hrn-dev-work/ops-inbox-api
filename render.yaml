@@ -1,0 +1,35 @@
+# Render Blueprint — S1 public API (free web + Postgres).
+# Docs: docs/en/deploy-render.md
+# https://render.com/docs/blueprint-spec
+
+databases:
+  - name: ops-inbox-db
+    plan: free
+    databaseName: ops_inbox
+    user: ops_inbox
+
+services:
+  - type: web
+    name: ops-inbox-api
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    healthCheckPath: /api/v1/health
+    buildCommand: npm ci && npx prisma generate && npm run build
+    startCommand: npx prisma migrate deploy && npm run start:prod
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NODE_ENV
+        value: production
+      - key: OUTBOUND_MODE
+        value: mock
+      - key: OUTBOUND_TIMEOUT_MS
+        value: "5000"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ops-inbox-db
+          property: connectionString
+      - key: WEBHOOK_SIGNING_SECRET
+        generateValue: true

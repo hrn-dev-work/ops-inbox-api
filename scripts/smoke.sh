@@ -9,7 +9,7 @@ echo "=== HEALTH ==="
 curl -sS "$BASE_URL/api/v1/health"
 echo
 
-SECRET=dev-webhook-secret-change-me
+SECRET="${WEBHOOK_SIGNING_SECRET:-dev-webhook-secret-change-me}"
 EXT_ID="evt_demo_$(date +%s)"
 BODY=$(printf '{"externalId":"%s","payload":{"title":"Payment retry failed","message":"Timeout talking to PSP","severity":"HIGH"}}' "$EXT_ID")
 SIG=$(printf '%s' "$BODY" | openssl dgst -sha256 -hmac "$SECRET" | awk '{print $2}')

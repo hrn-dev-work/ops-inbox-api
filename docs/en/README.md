@@ -9,6 +9,7 @@ Do **not** mix English and Japanese in one file. Layout policy: `docs-language` 
 
 - [Getting started](./getting-started.md) — first hour in this app repo
 - [Conventions](./conventions.md) — handbook: docs language, safety, quality gates, skills
+- [Deploy on Render](./deploy-render.md) — S1 public API (Blueprint)
 - [Local database (Docker)](./local-database.md) — Postgres runs in Compose, not on the host
 - [Local seed (Faker)](./local-seed.md) — safe dummy data; no production rows
 - [Reviews](./reviews.md) — 7-stage implementation-review protocol and report location

@@ -18,7 +18,7 @@ Full run: https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/rese
 | Auth | HMAC webhook signature on ingest only |
 | Packages | npm |
 | Tests | Jest · `scripts/smoke.sh` |
-| Hosting | Render or Railway (API) + GitHub |
+| Hosting | **Render** (this sample, Blueprint) · Railway as alternative · GitHub |
 
 ## Environment
 

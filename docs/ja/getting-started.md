@@ -27,3 +27,4 @@ npm run start:dev
 - seed 詳細: [local-seed.md](./local-seed.md)
 - AI コンテキスト除外: ルートの `.cursorignore`
 - Secret audit: `npm run secret:audit`（任意 hooks: `bash scripts/install-git-hooks.sh`）
+- デプロイ（S1 公開 URL）: [deploy-render.md](./deploy-render.md)
