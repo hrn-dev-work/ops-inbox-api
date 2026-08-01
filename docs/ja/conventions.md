@@ -68,9 +68,9 @@ NestJS 11 · Prisma 6 · PostgreSQL 16（Docker Compose）· REST + OpenAPI。
 
 ---
 
-## 未完了（S1）
+## S1 ホスト API
 
-ホストした **公開 API URL** — [deploy-render.md](./deploy-render.md) でデプロイし、live smoke 後に DoD を Yes にする。
+公開 URL: [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) — [deploy-render.md](./deploy-render.md)。ホスト smoke 確認済み。README DoD の公開 URL は **Yes**。
 
 ---
 

@@ -11,13 +11,13 @@
 |---|---|
 | スタック | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI（[ADR 0001](./docs/adr/0001-nestjs-prisma-backend.md)） |
 | 課題 | プロバイダ再送でチケットが二重になる |
-| いまできていること | HMAC + 冪等受信 + outbound モック記録 + Swagger |
-| S1 未着手 | 公開 API URL — [docs/ja/deploy-render.md](./docs/ja/deploy-render.md) |
+| いまできていること | HMAC + 冪等受信 + outbound モック + Swagger + ホスト API |
+| 公開 API | [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com)（[/docs](https://ops-inbox-api.onrender.com/docs)）— Render · [docs/ja/deploy-render.md](./docs/ja/deploy-render.md) |
 
 English: [README.md](./README.md)  
 用語・制約: [CONTEXT.md](./CONTEXT.md) · 規約: [docs/ja/conventions.md](./docs/ja/conventions.md) · 起動手順: [docs/ja/getting-started.md](./docs/ja/getting-started.md)
 
-起動後の docs: `http://localhost:3000/docs`
+ローカル docs: `http://localhost:3000/docs` · ホスト: [https://ops-inbox-api.onrender.com/docs](https://ops-inbox-api.onrender.com/docs)
 
 ---
 
@@ -104,11 +104,11 @@ npm run start:dev
 
 | 項目 | 状態 |
 |------|------|
-| Smoke 緑 | ローカルで可 |
-| OpenAPI `/docs` | あり |
+| Smoke 緑 | Yes（ローカル + ホスト） |
+| OpenAPI `/docs` | あり（ローカル + [ホスト](https://ops-inbox-api.onrender.com/docs)） |
 | README ケース | あり（本ファイル） |
 | Outbound モック | あり（inbox の `outboundCalls`） |
-| 公開 URL 一式 | GitHub あり · ホスト API **未** |
+| 公開 URL 一式 | Yes — [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) · GitHub あり |
 
 ---
 

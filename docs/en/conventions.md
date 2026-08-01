@@ -68,9 +68,9 @@ Reviews explainer: [reviews.md](./reviews.md)
 
 ---
 
-## Still open (S1)
+## S1 hosted API
 
-Hosted **public API URL** — deploy with [deploy-render.md](./deploy-render.md), then mark DoD Yes after live smoke.
+Public URL: [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) — see [deploy-render.md](./deploy-render.md). Hosted smoke verified; README DoD Public URL is **Yes**.
 
 ---
 

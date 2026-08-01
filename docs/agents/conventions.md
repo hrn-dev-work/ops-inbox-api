@@ -131,7 +131,7 @@ Inventory: [skill-set.md](./skill-set.md). Router: `.cursor/rules/project-entry.
 | Reviews how-to | [../en/reviews.md](../en/reviews.md) |
 | Getting started | [../en/getting-started.md](../en/getting-started.md) |
 
-**S1 hosted API:** prefer **Render** Blueprint ([../en/deploy-render.md](../en/deploy-render.md)). Until the live HTTPS URL is verified and written into README DoD, treat public API URL as open.
+**S1 hosted API:** Render Blueprint ([../en/deploy-render.md](../en/deploy-render.md)). Live URL: `https://ops-inbox-api.onrender.com` — health, `/docs`, and hosted `scripts/smoke.sh` verified. DoD Public URL: **Yes**.
 
 ---
 
@@ -176,7 +176,7 @@ Future projects get the same shape via:
 
 | Item | Status |
 |------|--------|
-| Hosted public API URL | Prefer Render — see [../en/deploy-render.md](../en/deploy-render.md); mark DoD Yes only after live smoke |
+| Hosted public API URL | Done — `https://ops-inbox-api.onrender.com` (hosted smoke verified) |
 | Redacting outbound `summary` in `http` mode | Deferred (product tradeoff) |
 | Dependabot | Deferred (noise policy) |
 | `prisma.config.ts` | Defer until Prisma 7 migration |

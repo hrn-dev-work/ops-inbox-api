@@ -10,13 +10,13 @@ Full research run (private): https://github.com/hrn-dev-work/cursor-dotfiles/blo
 |---|---|
 | Stack | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI ([ADR 0001](./docs/adr/0001-nestjs-prisma-backend.md)) |
 | Problem | Providers retry webhooks; naive handlers create duplicate tickets |
-| Result so far | HMAC + idempotent ingest + outbound mock recorded on inbox + Swagger |
-| S1 still open | Hosted public API URL — [docs/en/deploy-render.md](./docs/en/deploy-render.md) |
+| Result so far | HMAC + idempotent ingest + outbound mock + Swagger + hosted API |
+| Public API | [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) ([/docs](https://ops-inbox-api.onrender.com/docs)) — Render; deploy: [docs/en/deploy-render.md](./docs/en/deploy-render.md) |
 
 Japanese: [README.ja.md](./README.ja.md)  
 Agent glossary: [CONTEXT.md](./CONTEXT.md) · Conventions: [docs/en/conventions.md](./docs/en/conventions.md) · Human setup: [docs/en/getting-started.md](./docs/en/getting-started.md)
 
-Local docs (when running): `http://localhost:3000/docs`
+Local docs: `http://localhost:3000/docs` · Hosted: [https://ops-inbox-api.onrender.com/docs](https://ops-inbox-api.onrender.com/docs)
 
 ---
 
@@ -109,11 +109,11 @@ Pre-commit gate: ask the agent to run **implementation-review** (writes [docs/re
 
 | DoD item | Status |
 |----------|--------|
-| Smoke tests green | Yes (local) |
-| OpenAPI `/docs` | Yes |
+| Smoke tests green | Yes (local + hosted) |
+| OpenAPI `/docs` | Yes (local + [hosted](https://ops-inbox-api.onrender.com/docs)) |
 | README case study | Yes (this file) |
 | Outbound mock call | Yes (`OUTBOUND_MODE=mock`, see inbox `outboundCalls`) |
-| Public URL set (hosted API + GitHub) | GitHub yes · hosted API **Not yet** |
+| Public URL set (hosted API + GitHub) | Yes — [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) · GitHub yes |
 
 ---
 
