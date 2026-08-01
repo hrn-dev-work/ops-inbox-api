@@ -15,7 +15,7 @@
 | S1 未着手 | ホストした公開 API URL（GitHub は公開済み） |
 
 English: [README.md](./README.md)  
-用語・制約: [CONTEXT.md](./CONTEXT.md) · 起動手順: [docs/ja/getting-started.md](./docs/ja/getting-started.md)
+用語・制約: [CONTEXT.md](./CONTEXT.md) · 規約: [docs/ja/conventions.md](./docs/ja/conventions.md) · 起動手順: [docs/ja/getting-started.md](./docs/ja/getting-started.md)
 
 起動後の docs: `http://localhost:3000/docs`
 
@@ -93,7 +93,8 @@ npm run start:dev
 
 **このサンプルの非対象:** GraphQL BFF · React/Next UI · Redis · 本番用の外部 API 認証情報
 
-このリポ作業時のエージェント用スキル／ルール／hooks 一覧: [docs/agents/skill-set.md](./docs/agents/skill-set.md)（英語・エージェント向け）。
+このリポ作業時のエージェント用スキル／ルール／hooks 一覧: [docs/agents/skill-set.md](./docs/agents/skill-set.md)（英語・エージェント向け）。  
+規約ハンドブック: [docs/ja/conventions.md](./docs/ja/conventions.md) · エージェント正本: [docs/agents/conventions.md](./docs/agents/conventions.md)。
 
 コミット前ゲート: エージェントに **implementation-review** を実行させる（[docs/reviews/latest.md](./docs/reviews/latest.md) に出力）。
 

@@ -1,7 +1,8 @@
 # Skill set (agents)
 
 **English only.** Human-facing skill tables: [README.md](../../README.md) · [README.ja.md](../../README.ja.md).  
-Stack SSOT: [stack.md](./stack.md). Routing: `.cursor/rules/project-entry.mdc` + `~/.cursor/rules/global-agent-routing.mdc`.
+Stack SSOT: [stack.md](./stack.md). Consolidated conventions: [conventions.md](./conventions.md).  
+Routing: `.cursor/rules/project-entry.mdc` + `~/.cursor/rules/global-agent-routing.mdc`.
 
 This file lists **what agents should apply** in this repo and **what the sample demonstrates**. Do not invent alternate stacks without an ADR.
 
@@ -87,6 +88,7 @@ Do not disable the user-level `sessionStart` hook unless the user asks; side eff
 
 ## E. Maintenance
 
+- When conventions change: update [conventions.md](./conventions.md) and human mirrors `docs/en|ja/conventions.md` in the same change.
 - Sample skill rows change when shipped features or S1 DoD change — update **this file** and both READMEs together (`docs-language`).
 - Agent skill/rule rows change when `project-entry` or global routing changes — keep this file aligned with those tables (do not fork conflicting guidance).
 - Pre-commit quality gate: run **implementation-review** (`.cursor/rules/implementation-review.mdc`) → `docs/reviews/latest.md`.

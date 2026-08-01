@@ -6,7 +6,7 @@ Strategy (private GitHub): https://github.com/hrn-dev-work/cursor-dotfiles/blob/
 Research card S1 (in-repo): [docs/en/sample-card-s1.md](docs/en/sample-card-s1.md)  
 Research run (private GitHub): https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/research-runs/2026-08-01.md
 
-**Agents:** read this file + `docs/agents/` before non-trivial work.
+**Agents:** read this file + `docs/agents/` (start with [conventions.md](docs/agents/conventions.md)) before non-trivial work.
 
 ---
 

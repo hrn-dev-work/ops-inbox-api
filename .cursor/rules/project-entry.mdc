@@ -22,6 +22,7 @@ Global: `~/.cursor/rules/global-agent-routing.mdc` / `project-foundation.mdc`
 | React/TSX naming · prop shadowing | `~/.cursor/rules/react-component-conventions.mdc` |
 | Shell (WSL) | `wsl-agent-invoke` skill |
 | Doc locales | `docs-language` skill |
+| Project conventions (handbook) | `docs/agents/conventions.md` |
 | Skill / rule inventory | `docs/agents/skill-set.md` |
 | Post-implementation retrospective | `.cursor/rules/implementation-retrospective.mdc` (read → steps → append `docs/implementation-retrospective.md`) |
 

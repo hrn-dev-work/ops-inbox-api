@@ -14,7 +14,7 @@ Full research run (private): https://github.com/hrn-dev-work/cursor-dotfiles/blo
 | S1 still open | Hosted public API URL (GitHub repo is public) |
 
 Japanese: [README.ja.md](./README.ja.md)  
-Agent glossary: [CONTEXT.md](./CONTEXT.md) · Human setup: [docs/en/getting-started.md](./docs/en/getting-started.md)
+Agent glossary: [CONTEXT.md](./CONTEXT.md) · Conventions: [docs/en/conventions.md](./docs/en/conventions.md) · Human setup: [docs/en/getting-started.md](./docs/en/getting-started.md)
 
 Local docs (when running): `http://localhost:3000/docs`
 
@@ -98,7 +98,8 @@ Skills this sample demonstrates (aligned with Research card **S1** and [docs/age
 
 **Not in scope for this sample:** GraphQL BFF · React/Next UI · Redis · real third-party production credentials
 
-Agent skills / rules / hooks used when working this repo: [docs/agents/skill-set.md](./docs/agents/skill-set.md) (English, agents only).
+Agent skills / rules / hooks used when working this repo: [docs/agents/skill-set.md](./docs/agents/skill-set.md) (English, agents only).  
+Full conventions handbook: [docs/en/conventions.md](./docs/en/conventions.md) · agents: [docs/agents/conventions.md](./docs/agents/conventions.md).
 
 Pre-commit gate: ask the agent to run **implementation-review** (writes [docs/reviews/latest.md](./docs/reviews/latest.md)).
 

@@ -1,6 +1,6 @@
 # はじめに（Ops Inbox API）
 
-日本語ガイド。用語・制約は [`CONTEXT.md`](../../CONTEXT.md)（英語・エージェント向け）。  
+日本語ガイド。用語・制約は [`CONTEXT.md`](../../CONTEXT.md)（英語・エージェント向け）。規約: [conventions.md](./conventions.md)。  
 調査カード S1: [sample-card-s1.md](../ja/sample-card-s1.md) · 原本: https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/ja/research-runs/2026-08-01.md
 
 ## 前提

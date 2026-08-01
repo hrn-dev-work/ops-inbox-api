@@ -9,6 +9,8 @@
 | `security-git.mdc` | scripts / env edits (glob) | Secrets and Git safety |
 | `implementation-retrospective.mdc` | After impl / stop hook (glob) | Retrospective append |
 
+Consolidated handbook: `docs/agents/conventions.md` (humans: `docs/en/conventions.md` · `docs/ja/conventions.md`).
+
 <!-- Add project-specific rules below -->
 
 ## Relationship to global User Rules

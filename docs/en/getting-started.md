@@ -1,6 +1,6 @@
 # Getting started (Ops Inbox API)
 
-English human guide. Agent glossary: [`CONTEXT.md`](../../CONTEXT.md).  
+English human guide. Agent glossary: [`CONTEXT.md`](../../CONTEXT.md). Conventions: [conventions.md](./conventions.md).  
 Research card **S1** (`extend`): [sample-card-s1.md](../en/sample-card-s1.md) · private run: https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/research-runs/2026-08-01.md
 
 ## Prerequisites
