@@ -62,6 +62,13 @@ bash scripts/smoke.sh
 - Health: `GET $BASE_URL/api/v1/health`
 - Swagger: `$BASE_URL/docs`
 
-## After URL is known
+## Migration failure (P3009)
+
+If deploy logs show `migrate found failed migrations` (e.g. old `outbound_calls` before `inbox_items`):
+
+1. Render Dashboard → delete Postgres **`ops-inbox-db`** (demo data only)
+2. Blueprint **ops-inbox-api** → **Manual Sync** (recreates DB + redeploys), **or** recreate the database with the same Blueprint name and Manual Deploy the web service
+
+Do not leave a failed row in `_prisma_migrations` on a half-applied free DB.
 
 Update root `README.md` / `README.ja.md` **Status vs S1 DoD** (Public URL = Yes) and [../agents/conventions.md](../agents/conventions.md) § hosted URL.

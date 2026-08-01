@@ -57,6 +57,13 @@ bash scripts/smoke.sh
 - Health: `GET $BASE_URL/api/v1/health`
 - Swagger: `$BASE_URL/docs`
 
-## URL 確定後
+## マイグレーション失敗（P3009）
+
+デプロイログに `migrate found failed migrations`（古い `outbound_calls` が `inbox_items` より先など）と出た場合:
+
+1. Render Dashboard で Postgres **`ops-inbox-db`** を削除（デモ用）
+2. Blueprint **ops-inbox-api** で **Manual Sync**（DB 再作成 + 再デプロイ）、または同名 DB を作り直して Web を Manual Deploy
+
+失敗行が残った DB のままでは `migrate deploy` は進みません。
 
 `README.md` / `README.ja.md` の S1 DoD（公開 URL）と [../agents/conventions.md](../agents/conventions.md) を更新する。
