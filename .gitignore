@@ -7,3 +7,6 @@ coverage/
 .DS_Store
 .idea/
 .vscode/
+
+# Cursor session markers (local only)
+.cursor/retrospective/.session-edited

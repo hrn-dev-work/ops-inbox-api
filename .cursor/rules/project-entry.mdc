@@ -1,0 +1,28 @@
+---
+description: "ops-inbox-api — project entry (alwaysApply). Follow scoped rules for detail."
+alwaysApply: true
+---
+
+# Project entry (ops-inbox-api)
+
+Global: `~/.cursor/rules/global-agent-routing.mdc` / `project-foundation.mdc`
+
+**If:** a row below matches, **Then:** follow that reference. Read the `.mdc` / skill only when full text is not already in context (globs may already include it).
+
+| Situation | Follow |
+|-----------|--------|
+| Languages · DB · frameworks | `docs/agents/stack.md` (else `~/.cursor/rules/default-stack.mdc`) |
+| Code edits | `.cursor/rules/implementation-core.mdc` |
+| Tests | `.cursor/rules/testing-istqb.mdc` |
+| Secrets · Git | `.cursor/rules/security-git.mdc` |
+| Before commit / push / PR | `~/.cursor/rules/git-commit-boundary.mdc` |
+| Web UI copy | `~/.cursor/rules/ui-i18n-locale.mdc` + project frontend rules if any |
+| Web UI look · dashboards | `distinctive-ui` skill + `~/.cursor/rules/distinctive-ui.mdc` |
+| React/TSX naming · prop shadowing | `~/.cursor/rules/react-component-conventions.mdc` |
+| Shell (WSL) | `wsl-agent-invoke` skill |
+| Doc locales | `docs-language` skill |
+| Post-implementation retrospective | `.cursor/rules/implementation-retrospective.mdc` (read → steps → append `docs/implementation-retrospective.md`) |
+
+<!-- Project-specific: add backend-*.mdc / frontend-*.mdc / docs-*.mdc rows above -->
+
+**If:** the repo has `scripts/git-*.sh`, **Then:** follow that script table (`AGENTS.md` or `.cursor/skills/`).
