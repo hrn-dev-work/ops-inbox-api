@@ -45,6 +45,7 @@ cp .env.example .env
 docker compose up -d db
 npm install
 npx prisma migrate deploy
+npm run db:seed   # optional Faker demo data
 npm run start:dev
 ```
 
@@ -53,6 +54,9 @@ npm run start:dev
 | Health | `GET http://localhost:3000/api/v1/health` |
 | Swagger | http://localhost:3000/docs |
 | Smoke | `bash scripts/smoke.sh` |
+| Seed | `npm run db:seed` ([docs/en/local-seed.md](./docs/en/local-seed.md)) |
+| Secret audit | `npm run secret:audit` |
+| CI | `.github/workflows/ci.yml` (`secret-audit` → lint + test) |
 
 More detail: [docs/en/getting-started.md](./docs/en/getting-started.md)
 
@@ -87,14 +91,16 @@ Skills this sample demonstrates (aligned with Research card **S1** and [docs/age
 | Data | PostgreSQL 16 · Prisma 6 · migrations · unique constraint idempotency |
 | Integrations | HMAC-SHA256 webhook verify · idempotent ingest `(provider, externalId)` · outbound HTTP notify (mock by default) |
 | Domain | Webhook → Inbox normalization · severity / status lifecycle |
-| Quality | Jest unit tests · `scripts/smoke.sh` · health check with DB ping |
-| Local ops | Docker Compose Postgres · `.env` / `.env.example` (keys only) |
+| Quality | Jest unit tests · `scripts/smoke.sh` · health + DB ping · `scripts/secret-audit.sh` |
+| Local ops | Docker Compose Postgres · `.env` / `.env.example` · `.cursorignore` · Faker seed (local-host guard) |
 
 **Research tags (S1):** `nestjs` · `prisma` · `rest-api` · `openapi` · `webhook` · `outbound-integration` · `testing`
 
 **Not in scope for this sample:** GraphQL BFF · React/Next UI · Redis · real third-party production credentials
 
 Agent skills / rules / hooks used when working this repo: [docs/agents/skill-set.md](./docs/agents/skill-set.md) (English, agents only).
+
+Pre-commit gate: ask the agent to run **implementation-review** (writes [docs/reviews/latest.md](./docs/reviews/latest.md)).
 
 ---
 

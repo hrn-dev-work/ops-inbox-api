@@ -1,0 +1,130 @@
+---
+description: >-
+  Zero-oversight 7-stage sequential review (Scout→Tooling→Validator→Architect→DBA→SRE→Writer/SDET).
+  Run when user asks to implementation-review, pre-commit review, or「コミットしたいので
+  implementation-review を実行して」. Do NOT auto-run during normal coding.
+alwaysApply: false
+---
+
+# Zero-Oversight Automated Review Protocol
+
+You are an automated CI/CD pipeline supervisor coordinating multiple expert reviewers.
+
+**When to run:** Only when the user explicitly requests `implementation-review` (or equivalent pre-commit review). Do not run this protocol on every file edit.
+
+You MUST execute the following 7 stages in EXACT sequential order.
+
+**CRITICAL RULES:**
+
+- Do NOT skip any stages.
+- Do NOT guess. Prove everything by reading `git diff HEAD` (and unstaged/staged as needed) and by running commands.
+- One role at a time: finish the current stage checklist before starting the next.
+- If any stage fails, STOP, write the report with **FINAL STATUS: FAIL**, and ask before auto-fixing. Do not proceed to git commit.
+
+Shell: use WSL (`wsl-agent-invoke`) when the workspace is under `\\wsl.localhost\`.
+
+Related (do not replace this protocol): `testing-istqb.mdc`, `security-git.mdc`, `docs/agents/security.md`, `git-commit-boundary.mdc`.
+
+---
+
+## Stage 1: The Scout (Pre-review Cleanup)
+
+Before formal review, ensure the code is clean. Check the diff and automatically apply these fixes if needed:
+
+- [ ] Remove unused imports and dead variables.
+- [ ] Refactor deep nesting into early returns (guard clauses).
+- [ ] Ensure variable/function names reflect domain language (`CONTEXT.md`).
+
+If Scout applies edits, re-read the diff before Stage 2.
+
+---
+
+## Stage 2: Tooling Verification
+
+Run these commands from the repo root. If any fail, STOP and FAIL the review.
+
+1. `npm run lint`
+2. `npx prisma validate` — required if `prisma/schema.prisma` or migrations are in the diff; otherwise note SKIPPED with reason
+3. `npm run test`
+
+Record command outcomes (pass/fail) in the final report. Do not claim pass without output evidence.
+
+---
+
+## Stage 3: The Validator (Security & Typing)
+
+Analyze the diff strictly for defensive programming:
+
+- [ ] **DTO validation:** All REST `/api/v1` endpoints MUST use `class-validator` decorators (e.g. `@IsString()`).
+- [ ] **Security:** Webhook HMAC-SHA256 signature verification MUST remain present on ingest paths touched by the diff.
+- [ ] **Secrets:** No hardcoded secrets/tokens; no raw `.env` reads outside ConfigModule / documented config access. Confirm `.cursorignore` still excludes dumps/logs/env when those paths are introduced.
+
+---
+
+## Stage 4: The Domain Architect (Design)
+
+Analyze the diff for architectural integrity:
+
+- [ ] **Separation of concerns:** Controllers MUST NOT contain business logic or DB calls. Delegate to Services.
+- [ ] **Idempotency:** Webhook ingest MUST handle duplicates via `(provider, externalId)` uniqueness (HTTP 200 + `created: false`, not 409).
+- [ ] **Data access:** Prisma queries MUST NOT be inside loops (N+1). Use `$transaction` for multi-mutation consistency when needed.
+
+---
+
+## Stage 5: The DBA (Database Safety)
+
+If `prisma/schema.prisma` or migrations were modified; otherwise mark **SKIPPED**:
+
+- [ ] **Destructive changes:** Flag `DROP` / data-loss migrations as CRITICAL WARNING.
+- [ ] **Performance:** New filter/join paths SHOULD have matching `@@index` (or documented reason).
+
+---
+
+## Stage 6: The SRE (Observability & Reliability)
+
+Analyze error handling and outbound integrations:
+
+- [ ] **Logging:** Include contextual fields (e.g. `externalId`, `provider`) where useful. Prefer Nest/Logger over raw `console.log` in app code.
+- [ ] **Error handling:** No silent catches (`catch (e) {}` without rethrow or log).
+- [ ] **Timeouts:** Outbound HTTP calls MUST use `AbortSignal.timeout` / `OUTBOUND_TIMEOUT_MS` (default 5000).
+- [ ] **Secrets tooling:** `scripts/secret-audit.sh` still green for the change set when secrets-related paths are touched.
+
+---
+
+## Stage 7: The Technical Writer & SDET (Docs & Tests)
+
+Check alignment between code, docs, and tests:
+
+- [ ] **OpenAPI:** `@ApiOperation` / `@ApiResponse` / `@ApiProperty` updated when controllers/DTOs change.
+- [ ] **Tests:** Unit tests for business logic; HTTP-level coverage via Jest/supertest or `scripts/smoke.sh` as appropriate. Prefer ISTQB boundary values (`testing-istqb.mdc`).
+- [ ] **Docs:** Env or architecture changes reflected in `README.md` / `README.ja.md` / `docs/` (`docs-language` — one locale per file). Update `docs/agents/skill-set.md` when demonstrated skills change.
+
+---
+
+## Final Output Generation (Mandatory)
+
+After completing ALL 7 stages, create or overwrite `docs/reviews/latest.md` using EXACTLY this structure:
+
+~~~markdown
+# Comprehensive Review Report
+- **Date:** [Current Date & Time]
+- **Files Changed:** [List changed files]
+
+## Sign-offs
+- [PASS/FAIL] **The Scout** (Cleanup applied?)
+- [PASS/FAIL] **Tooling** (Lint & Tests passed?)
+- [PASS/FAIL] **The Validator** (Security & Validation)
+- [PASS/FAIL] **The Architect** (Domain & Architecture)
+- [PASS/FAIL/SKIPPED] **The DBA** (Prisma changes safe?)
+- [PASS/FAIL] **The SRE** (Logs & Error handling)
+- [PASS/FAIL] **Writer & SDET** (Swagger, Docs, Tests)
+
+## Issues Found & Required Fixes
+[List specific issues categorized by the reviewer who found them. If none, write "None."]
+
+## FINAL STATUS: [PASS or FAIL]
+~~~
+
+**If FINAL STATUS is FAIL:** Ask: “Would you like me to auto-fix the issues found by [Reviewer Name]?” Do NOT proceed to git commit until the user confirms.
+
+**If FINAL STATUS is PASS:** Tell the user review passed and that commit is allowed (still wait for an explicit commit request unless they already asked to commit after a green review).

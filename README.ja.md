@@ -46,6 +46,7 @@ cp .env.example .env
 docker compose up -d db
 npm install
 npx prisma migrate deploy
+npm run db:seed   # 任意: Faker デモデータ
 npm run start:dev
 ```
 
@@ -54,6 +55,9 @@ npm run start:dev
 | Health | `GET http://localhost:3000/api/v1/health` |
 | Swagger | http://localhost:3000/docs |
 | Smoke | `bash scripts/smoke.sh` |
+| Seed | `npm run db:seed`（[docs/ja/local-seed.md](./docs/ja/local-seed.md)） |
+| Secret audit | `npm run secret:audit` |
+| CI | `.github/workflows/ci.yml`（`secret-audit` → lint + test） |
 
 詳細: [docs/ja/getting-started.md](./docs/ja/getting-started.md)
 
@@ -82,14 +86,16 @@ npm run start:dev
 | データ | PostgreSQL 16 · Prisma 6 · マイグレーション · unique 制約による冪等 |
 | 連携 | HMAC-SHA256 Webhook 検証 · `(provider, externalId)` 冪等受信 · outbound HTTP 通知（既定はモック） |
 | ドメイン | Webhook → Inbox 正規化 · severity / status ライフサイクル |
-| 品質 | Jest 単体テスト · `scripts/smoke.sh` · DB ping 付きヘルスチェック |
-| ローカル運用 | Docker Compose の Postgres · `.env` / `.env.example`（キー名のみ） |
+| 品質 | Jest 単体テスト · `scripts/smoke.sh` · health + DB ping · `scripts/secret-audit.sh` |
+| ローカル運用 | Docker Compose の Postgres · `.env` / `.env.example` · `.cursorignore` · Faker seed（ローカルホストガード） |
 
 **調査タグ（S1）:** `nestjs` · `prisma` · `rest-api` · `openapi` · `webhook` · `outbound-integration` · `testing`
 
 **このサンプルの非対象:** GraphQL BFF · React/Next UI · Redis · 本番用の外部 API 認証情報
 
 このリポ作業時のエージェント用スキル／ルール／hooks 一覧: [docs/agents/skill-set.md](./docs/agents/skill-set.md)（英語・エージェント向け）。
+
+コミット前ゲート: エージェントに **implementation-review** を実行させる（[docs/reviews/latest.md](./docs/reviews/latest.md) に出力）。
 
 ---
 

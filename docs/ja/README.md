@@ -9,3 +9,5 @@
 
 - [はじめに](./getting-started.md) — このアプリリポでの最初の 1 時間
 - [ローカル DB（Docker）](./local-database.md) — Postgres はホストではなく Compose 上
+- [ローカル seed（Faker）](./local-seed.md) — 安全なダミー（本番データ禁止）
+- [レビュー](./reviews.md) — implementation-review（7段階）とレポート場所

@@ -10,6 +10,10 @@ Detailed project traps: **`CONTEXT.md` § Security Guardrails** (if present).
 - `.env.example`: **key names only** — empty or dummy values.
 - Server-only secrets stay on the backend. **`NEXT_PUBLIC_*` / browser-exposed env is public** — never put PA-API, Gemini, DB, or Sheets credentials there.
 - Do not log secrets, PII, or full request payloads with credentials.
+- **Logging:** log correlation fields only (`provider`, `externalId`, `inboxItemId`). Never log raw webhook bodies, `payload`, or seeded customer email/phone.
+- Keep production dumps / CSV exports out of the repo. Use root `.cursorignore` so Cursor does not index `.env*`, keys, logs, or dump files. Agent Shell/MCP are **not** blocked by `.cursorignore` — keep real secrets out of the tree.
+- Local demo data: `npm run db:seed` (`prisma/seed.ts` + Faker only). Seed **refuses** non-local `DATABASE_URL` hosts and `NODE_ENV=production`.
+- `OUTBOUND_MODE=http` posts inbox title/summary to `OUTBOUND_URL` with `OUTBOUND_TIMEOUT_MS`; keep `mock` for demos.
 
 ## Grilling — security (Round 1 extension)
 
@@ -32,18 +36,17 @@ Code generation and design **must** align with:
 
 If a scanner flags a finding, **fix or document accepted risk in an ADR** — do not silence without review.
 
-## Repo tooling (add when missing)
+## Repo tooling (this sample)
 
-| Layer | Target |
-|-------|--------|
-| pre-commit | Secret block (`pre-commit-secret-check.sh` or gitleaks) |
-| CI | `secret-audit` job (gitleaks + Trivy secret) |
-| GitHub | Secret Scanning + Push Protection (org/repo settings) |
-| Dependencies | Dependabot or equivalent |
+| Layer | Path |
+|-------|------|
+| Pre-commit | `bash scripts/install-git-hooks.sh` → `.githooks` → `scripts/pre-commit-secret-check.sh` |
+| Local / CI baseline | `bash scripts/secret-audit.sh` |
+| CI | `.github/workflows/ci.yml` — `secret-audit` then `lint-and-test` |
+| Config | `.gitleaks.toml`, `.trivyignore` |
 
-Copy patterns from a reference repo (e.g. SmartResearch-HQ) when bootstrapping production apps.
+GitHub **Secret Scanning + Push Protection** remain org/repo settings (manual).
 
 ## References
-
 - Project ADRs under `docs/adr/` — especially auth and public-API decisions.
 - [domain.md](./domain.md) — CONTEXT / ADR update rules.

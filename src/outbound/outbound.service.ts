@@ -20,7 +20,9 @@ export class OutboundService {
   ) {}
 
   async notifyInboxCreated(input: OutboundNotifyInput): Promise<OutboundCall> {
-    const mode = (this.config.get<string>('OUTBOUND_MODE') ?? 'mock').toLowerCase();
+    const mode = (
+      this.config.get<string>('OUTBOUND_MODE') ?? 'mock'
+    ).toLowerCase();
     const targetUrl =
       this.config.get<string>('OUTBOUND_URL') ?? 'mock://ops-inbox/notify';
 
@@ -41,8 +43,8 @@ export class OutboundService {
         inboxItemId: input.inboxItemId,
         targetUrl: 'mock://ops-inbox/notify',
         statusCode: 200,
-        requestBody: requestBody as Prisma.InputJsonValue,
-        responseBody: { mocked: true } as Prisma.InputJsonValue,
+        requestBody: requestBody,
+        responseBody: { mocked: true },
       },
     });
   }
@@ -54,12 +56,18 @@ export class OutboundService {
   ): Promise<OutboundCall> {
     let statusCode = 0;
     let responseBody: Prisma.InputJsonValue = { error: 'no response' };
+    const timeoutMs = Number(
+      this.config.get<string>('OUTBOUND_TIMEOUT_MS') ?? '5000',
+    );
 
     try {
       const res = await fetch(targetUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody),
+        signal: AbortSignal.timeout(
+          Number.isFinite(timeoutMs) ? timeoutMs : 5000,
+        ),
       });
       statusCode = res.status;
       const text = await res.text();
@@ -73,7 +81,9 @@ export class OutboundService {
       responseBody = {
         error: error instanceof Error ? error.message : 'outbound failed',
       };
-      this.logger.warn(`Outbound HTTP failed for ${inboxItemId}`);
+      this.logger.warn(
+        `Outbound HTTP failed for inboxItemId=${inboxItemId} (no payload logged)`,
+      );
     }
 
     return this.prisma.outboundCall.create({

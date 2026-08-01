@@ -79,3 +79,7 @@ See [docs/agents/security.md](docs/agents/security.md).
 - Validate DTOs at HTTP boundary.
 - Never log full secrets; do not commit `.env`.
 - No real third-party production credentials in the sample.
+- Prefer `.cursorignore` + Faker seeds for local data; never load production dumps into Compose Postgres for demos.
+- Seed refuses non-local `DATABASE_URL` and `NODE_ENV=production` (`assertSafeSeedDatabaseUrl`).
+- Do not log raw webhook payloads or customer PII; log ids only.
+- Secret gate: `bash scripts/secret-audit.sh` / CI workflow `secret-audit`.

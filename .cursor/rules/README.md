@@ -1,18 +1,19 @@
 # ops-inbox-api — Cursor Rules
 
-| ファイル | 適用トリガー | 内容 |
-|----------|--------------|------|
-| `project-entry.mdc` | 毎セッション（唯一の alwaysApply） | ルーティング表 |
-| `implementation-core.mdc` | コード編集時（glob） | DDD・命名・疎結合 |
-| `testing-istqb.mdc` | テスト編集時（glob） | ISTQB 準拠 |
-| `security-git.mdc` | scripts / env 編集時（glob） | 秘密情報・Git |
-| `implementation-retrospective.mdc` | 実装後 / stop フック（glob） | 反省会 |
+| File | Trigger | Purpose |
+|------|---------|---------|
+| `project-entry.mdc` | Every session (only alwaysApply) | Routing table |
+| `implementation-core.mdc` | Code edits (glob) | DDD, naming, loose coupling |
+| `implementation-review.mdc` | Explicit **implementation-review** / pre-commit | 7-stage sequential review → `docs/reviews/latest.md` |
+| `testing-istqb.mdc` | Test edits (glob) | ISTQB-aligned testing |
+| `security-git.mdc` | scripts / env edits (glob) | Secrets and Git safety |
+| `implementation-retrospective.mdc` | After impl / stop hook (glob) | Retrospective append |
 
-<!-- プロジェクト固有 rules を下に追記 -->
+<!-- Add project-specific rules below -->
 
-## グローバル User Rules との関係
+## Relationship to global User Rules
 
-- **正本:** `~/.cursor/rules/`（WSL）。`~/.cursor/rules/global-agent-routing.mdc` が全体のルーター。
-- **優先順位:** 本リポジトリの `.cursor/rules/*.mdc` + `docs/` + `AGENTS.md` が、グローバルより優先。
+- **Canonical globals:** `~/.cursor/rules/` (WSL). Router: `global-agent-routing.mdc`.
+- **Precedence:** this repo’s `.cursor/rules/*.mdc` + `docs/` + `AGENTS.md` override globals when they conflict.
 
-テンプレ由来: `~/.cursor/templates/project-rules/`
+Template source: `~/.cursor/templates/project-rules/`

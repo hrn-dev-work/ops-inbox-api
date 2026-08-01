@@ -1,0 +1,26 @@
+# Gitleaks — local-dev fixtures only (not production secrets).
+# https://github.com/gitleaks/gitleaks
+
+title = "ops-inbox-api"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Documented local demo placeholders"
+
+paths = [
+  '''^\.env\.example$''',
+  '''^docker-compose\.yml$''',
+  '''^docker-compose\.example\.yml$''',
+  '''^scripts/smoke\.sh$''',
+  '''^docs/''',
+  '''^src/.*\.spec\.ts$''',
+  '''^test/''',
+]
+
+regexes = [
+  '''dev-webhook-secret-change-me''',
+  '''change-me''',
+  '''example\.com''',
+]

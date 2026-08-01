@@ -6,10 +6,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class InboxService {
   constructor(private readonly prisma: PrismaService) {}
 
-  list(filters: {
-    status?: InboxStatus;
-    severity?: Severity;
-  }) {
+  list(filters: { status?: InboxStatus; severity?: Severity }) {
     return this.prisma.inboxItem.findMany({
       where: {
         status: filters.status,

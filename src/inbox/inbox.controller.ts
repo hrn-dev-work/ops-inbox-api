@@ -42,7 +42,9 @@ export class InboxController {
   constructor(private readonly inboxService: InboxService) {}
 
   @Get()
-  @ApiOperation({ summary: 'List inbox items (newest / highest severity first)' })
+  @ApiOperation({
+    summary: 'List inbox items (newest / highest severity first)',
+  })
   @ApiOkResponse({ type: [ListInboxItemResponse] })
   list(@Query() query: ListInboxQueryDto): Promise<ListInboxItemResponse[]> {
     return this.inboxService.list(query);

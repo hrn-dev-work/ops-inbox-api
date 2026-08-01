@@ -16,6 +16,7 @@ cp .env.example .env   # if needed
 docker compose up -d db
 npm install
 npx prisma migrate deploy
+npm run db:seed          # optional: Faker demo rows (never production data)
 npm run start:dev
 ```
 
@@ -23,3 +24,6 @@ npm run start:dev
 - Swagger: `http://localhost:3000/docs`
 - Health: `GET /api/v1/health`
 - Smoke: `bash scripts/smoke.sh`
+- Local seed details: [local-seed.md](./local-seed.md)
+- AI context exclusions: root `.cursorignore`
+- Secret audit: `npm run secret:audit` (optional hooks: `bash scripts/install-git-hooks.sh`)

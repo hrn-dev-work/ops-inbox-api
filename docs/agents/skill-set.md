@@ -18,8 +18,8 @@ Aligned with Research card **S1** and the public README skill table.
 | Data | PostgreSQL 16 · Prisma 6 · migrations · unique-constraint idempotency |
 | Integrations | HMAC-SHA256 webhook verify · idempotent ingest `(provider, externalId)` · outbound HTTP notify (mock by default) |
 | Domain | Webhook → Inbox normalization · severity / status lifecycle |
-| Quality | Jest · `scripts/smoke.sh` · health + DB ping |
-| Local ops | Docker Compose Postgres · `.env` / `.env.example` (keys only) |
+| Quality | Jest · `scripts/smoke.sh` · health + DB ping · `scripts/secret-audit.sh` |
+| Local ops | Docker Compose Postgres · `.env` / `.env.example` (keys only) · `.cursorignore` · Faker `prisma/seed.ts` (local-host guard) |
 
 **Research tags (S1):** `nestjs` · `prisma` · `rest-api` · `openapi` · `webhook` · `outbound-integration` · `testing`
 
@@ -53,6 +53,7 @@ Paths: `~/.cursor/skills/<name>/SKILL.md` (WSL: `~/…` or `/mnt/c/Users/msmhr/.
 |------|------|
 | `project-entry.mdc` | Always — situation → follow table |
 | `implementation-core.mdc` | Code edits |
+| `implementation-review.mdc` | Explicit **implementation-review** / pre-commit review (7 stages; write `docs/reviews/latest.md`) |
 | `testing-istqb.mdc` | Tests |
 | `security-git.mdc` | Secrets · Git safety |
 | `implementation-retrospective.mdc` | After implementation — append `docs/implementation-retrospective.md` |
@@ -88,3 +89,5 @@ Do not disable the user-level `sessionStart` hook unless the user asks; side eff
 
 - Sample skill rows change when shipped features or S1 DoD change — update **this file** and both READMEs together (`docs-language`).
 - Agent skill/rule rows change when `project-entry` or global routing changes — keep this file aligned with those tables (do not fork conflicting guidance).
+- Pre-commit quality gate: run **implementation-review** (`.cursor/rules/implementation-review.mdc`) → `docs/reviews/latest.md`.
+- CI gate: `.github/workflows/ci.yml` (`secret-audit` → lint + test).
