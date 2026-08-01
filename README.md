@@ -76,6 +76,28 @@ More detail: [docs/en/getting-started.md](./docs/en/getting-started.md)
 
 ---
 
+## Skill set
+
+Skills this sample demonstrates (aligned with Research card **S1** and [docs/agents/stack.md](./docs/agents/stack.md)).
+
+| Area | Skills |
+|------|--------|
+| Backend | NestJS 11 · TypeScript (strict) · modular Nest architecture |
+| API | REST `/api/v1` · OpenAPI / Swagger (`/docs`) · DTO validation (`class-validator`) |
+| Data | PostgreSQL 16 · Prisma 6 · migrations · unique constraint idempotency |
+| Integrations | HMAC-SHA256 webhook verify · idempotent ingest `(provider, externalId)` · outbound HTTP notify (mock by default) |
+| Domain | Webhook → Inbox normalization · severity / status lifecycle |
+| Quality | Jest unit tests · `scripts/smoke.sh` · health check with DB ping |
+| Local ops | Docker Compose Postgres · `.env` / `.env.example` (keys only) |
+
+**Research tags (S1):** `nestjs` · `prisma` · `rest-api` · `openapi` · `webhook` · `outbound-integration` · `testing`
+
+**Not in scope for this sample:** GraphQL BFF · React/Next UI · Redis · real third-party production credentials
+
+Agent skills / rules / hooks used when working this repo: [docs/agents/skill-set.md](./docs/agents/skill-set.md) (English, agents only).
+
+---
+
 ## Status vs S1 DoD
 
 | DoD item | Status |

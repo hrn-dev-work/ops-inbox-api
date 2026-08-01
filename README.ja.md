@@ -71,6 +71,28 @@ npm run start:dev
 
 ---
 
+## スキルセット
+
+このサンプルが示すスキル（調査カード **S1**・[docs/agents/stack.md](./docs/agents/stack.md) に準拠）。
+
+| 領域 | スキル |
+|------|--------|
+| バックエンド | NestJS 11 · TypeScript（strict）· Nest モジュール構成 |
+| API | REST `/api/v1` · OpenAPI / Swagger（`/docs`）· DTO バリデーション（`class-validator`） |
+| データ | PostgreSQL 16 · Prisma 6 · マイグレーション · unique 制約による冪等 |
+| 連携 | HMAC-SHA256 Webhook 検証 · `(provider, externalId)` 冪等受信 · outbound HTTP 通知（既定はモック） |
+| ドメイン | Webhook → Inbox 正規化 · severity / status ライフサイクル |
+| 品質 | Jest 単体テスト · `scripts/smoke.sh` · DB ping 付きヘルスチェック |
+| ローカル運用 | Docker Compose の Postgres · `.env` / `.env.example`（キー名のみ） |
+
+**調査タグ（S1）:** `nestjs` · `prisma` · `rest-api` · `openapi` · `webhook` · `outbound-integration` · `testing`
+
+**このサンプルの非対象:** GraphQL BFF · React/Next UI · Redis · 本番用の外部 API 認証情報
+
+このリポ作業時のエージェント用スキル／ルール／hooks 一覧: [docs/agents/skill-set.md](./docs/agents/skill-set.md)（英語・エージェント向け）。
+
+---
+
 ## S1 DoD との差分
 
 | 項目 | 状態 |

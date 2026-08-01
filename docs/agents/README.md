@@ -5,9 +5,10 @@ Read in this order before non-trivial implementation:
 1. **`CONTEXT.md`** (repo root) — domain language, traps, **security guardrails**, stack summary
 2. **[stack.md](./stack.md)** — standard languages / DB / runtime (SSOT for Cursor **and** Gemini)
 3. **[security.md](./security.md)** — secrets, OWASP / IPA baseline, static analysis
-4. **`docs/adr/`** — irreversible decisions (if any ADRs exist)
-5. **Project specs** — human docs under `docs/en/` (and `docs/ja/` for Japanese readers); root `README.md`
-6. **Git / PR playbook** — project-specific link below (if present)
+4. **[skill-set.md](./skill-set.md)** — sample skills + Cursor skills/rules/hooks for this repo
+5. **`docs/adr/`** — irreversible decisions (if any ADRs exist)
+6. **Project specs** — human docs under `docs/en/` (and `docs/ja/` for Japanese readers); root `README.md`
+7. **Git / PR playbook** — project-specific link below (if present)
 
 **Language:** Files in this directory, `CONTEXT.md`, and ADRs are **English only**. Do not mix JA into them. Human JA docs live in `docs/ja/`. Policy: `docs-language` skill.
 
@@ -15,7 +16,8 @@ Read in this order before non-trivial implementation:
 
 | Doc | Purpose |
 |-----|---------|
-| [Standard stack](./stack.md) | Python/FastAPI + TS/React/Next + Postgres defaults; multi-agent SSOT |
+| [Standard stack](./stack.md) | NestJS / Prisma / Postgres (ADR 0001); multi-agent SSOT |
+| [Skill set](./skill-set.md) | Sample skills + Cursor skills / rules / hooks inventory |
 | [Domain consumer rules](./domain.md) | How to read and update `CONTEXT.md` / ADRs |
 | [ADR index](../adr/README.md) | Architecture decision records |
 | [Getting started (en)](../en/getting-started.md) | First hour in this app repo |
