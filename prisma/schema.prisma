@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum InboxStatus {
+  OPEN
+  ACKED
+  CLOSED
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model WebhookEvent {
+  id          String     @id @default(cuid())
+  provider    String
+  externalId  String
+  payload     Json
+  receivedAt  DateTime   @default(now())
+  processedAt DateTime?
+  inboxItem   InboxItem?
+
+  @@unique([provider, externalId])
+  @@index([provider, receivedAt])
+  @@map("webhook_events")
+}
+
+model InboxItem {
+  id            String       @id @default(cuid())
+  title         String
+  summary       String
+  severity      Severity     @default(MEDIUM)
+  status        InboxStatus  @default(OPEN)
+  provider      String
+  sourceEventId String       @unique
+  sourceEvent   WebhookEvent @relation(fields: [sourceEventId], references: [id], onDelete: Cascade)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([status, severity])
+  @@index([provider, createdAt])
+  @@map("inbox_items")
+}
