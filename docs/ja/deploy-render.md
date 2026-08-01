@@ -49,13 +49,16 @@
 ## 確認
 
 ```bash
-export BASE_URL="https://<service-name>.onrender.com"
+# Dashboard → ops-inbox-api → Environment の WEBHOOK_SIGNING_SECRET をコピー
+export BASE_URL="https://ops-inbox-api.onrender.com"
 export WEBHOOK_SIGNING_SECRET="<Dashboardの値>"
 bash scripts/smoke.sh
 ```
 
 - Health: `GET $BASE_URL/api/v1/health`
 - Swagger: `$BASE_URL/docs`
+
+**S1 状態（2026-08-01）:** 上記 URL で稼働。ホスト smoke（ingest / replay / outbound モック）確認済み。README DoD の公開 URL は **Yes**。`WEBHOOK_SIGNING_SECRET` はコミットしない。
 
 ## マイグレーション失敗（P3009）
 
@@ -64,6 +67,4 @@ bash scripts/smoke.sh
 1. Render Dashboard で Postgres **`ops-inbox-db`** を削除（デモ用）
 2. Blueprint **ops-inbox-api** で **Manual Sync**（DB 再作成 + 再デプロイ）、または同名 DB を作り直して Web を Manual Deploy
 
-失敗行が残った DB のままでは `migrate deploy` は進みません。
-
-`README.md` / `README.ja.md` の S1 DoD（公開 URL）と [../agents/conventions.md](../agents/conventions.md) を更新する。
+失敗行が残った DB のままでは `migrate deploy` は進みません。クリーンな migrate + smoke のあと、公開 URL や検証状態が変わったときだけ README / conventions の DoD を更新する。

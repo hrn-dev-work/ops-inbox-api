@@ -54,7 +54,7 @@ _Avoid_: trusting unsigned bodies outside local demo
 | Auth | Webhook HMAC on ingest only (v1) |
 | Packages | npm (Nest default; pnpm not required for this sample) |
 | Tests | Jest · smoke script |
-| Hosting target | Render/Railway for API; repo on GitHub |
+| Hosting target | **Render** Blueprint (`render.yaml`); live API `https://ops-inbox-api.onrender.com` (hosted smoke verified). Railway remains an alternative only via ADR. |
 
 **Ports:** API `3000` · Postgres `5432` · Health `GET /api/v1/health` · Docs `GET /docs`
 

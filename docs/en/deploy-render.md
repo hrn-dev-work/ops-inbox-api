@@ -54,13 +54,15 @@ After the first deploy turns **Live** (wait through cold start if needed):
 
 ```bash
 # From Dashboard → ops-inbox-api → Environment, copy WEBHOOK_SIGNING_SECRET
-export BASE_URL="https://<service-name>.onrender.com"
+export BASE_URL="https://ops-inbox-api.onrender.com"
 export WEBHOOK_SIGNING_SECRET="<from-dashboard>"
 bash scripts/smoke.sh
 ```
 
 - Health: `GET $BASE_URL/api/v1/health`
 - Swagger: `$BASE_URL/docs`
+
+**S1 status (2026-08-01):** Live URL above; hosted smoke (ingest / replay / outbound mock) verified. README DoD Public URL = **Yes**. Do not commit `WEBHOOK_SIGNING_SECRET`.
 
 ## Migration failure (P3009)
 
@@ -69,6 +71,4 @@ If deploy logs show `migrate found failed migrations` (e.g. old `outbound_calls`
 1. Render Dashboard → delete Postgres **`ops-inbox-db`** (demo data only)
 2. Blueprint **ops-inbox-api** → **Manual Sync** (recreates DB + redeploys), **or** recreate the database with the same Blueprint name and Manual Deploy the web service
 
-Do not leave a failed row in `_prisma_migrations` on a half-applied free DB.
-
-Update root `README.md` / `README.ja.md` **Status vs S1 DoD** (Public URL = Yes) and [../agents/conventions.md](../agents/conventions.md) § hosted URL.
+Do not leave a failed row in `_prisma_migrations` on a half-applied free DB. After a clean migrate + smoke, refresh README / conventions DoD only if the public URL or verification status changed.
