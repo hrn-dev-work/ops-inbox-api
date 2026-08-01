@@ -31,7 +31,10 @@ Render creates:
 - Postgres `ops-inbox-db`
 - Web service `ops-inbox-api` (HTTPS `*.onrender.com`)
 
-On each deploy/start: `prisma migrate deploy` then `npm run start:prod`.
+On each **build**: `npm ci --include=dev && npx prisma generate && npm run build`  
+(`--include=dev` is required so Nest CLI / Prisma CLI install under `NODE_ENV=production`.)
+
+On each **start**: `prisma migrate deploy` then `npm run start:prod`.
 
 ## Environment
 
