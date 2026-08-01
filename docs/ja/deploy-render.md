@@ -33,7 +33,7 @@
 
 起動ビルド: `npm ci --include=dev && npx prisma generate && npm run build`  
 （`NODE_ENV=production` でも Nest / Prisma CLI を入れるため `--include=dev` 必須）  
-起動時: `npm run start:render`（`prisma migrate deploy` → `node dist/src/main.js`）。
+起動時: `bash scripts/render-start.sh`（`prisma migrate deploy` → `node dist/main.js`、`0.0.0.0` 待受）。
 
 ## 環境変数
 
