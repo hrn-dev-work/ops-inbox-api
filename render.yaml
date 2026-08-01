@@ -17,7 +17,7 @@ services:
     branch: main
     healthCheckPath: /api/v1/health
     buildCommand: npm ci --include=dev && npx prisma generate && npm run build
-    startCommand: npx prisma migrate deploy && npm run start:prod
+    startCommand: npm run start:render
     envVars:
       - key: NODE_VERSION
         value: "20"
