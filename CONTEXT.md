@@ -37,7 +37,7 @@ _Avoid_: trusting unsigned bodies outside local demo
 ## Relationships
 
 - 1 WebhookEvent → 0..1 InboxItem  
-- 1 InboxItem → 0..n OutboundCall (after S1 extend)  
+- 1 InboxItem → 0..n OutboundCall (created on first ingest when S1 outbound enabled)  
 - InboxItem.status: OPEN → ACKED → CLOSED  
 
 ---

@@ -9,12 +9,13 @@ export class InboxService {
   list(filters: {
     status?: InboxStatus;
     severity?: Severity;
-  }): Promise<InboxItem[]> {
+  }) {
     return this.prisma.inboxItem.findMany({
       where: {
         status: filters.status,
         severity: filters.severity,
       },
+      include: { outboundCalls: { orderBy: { createdAt: 'asc' } } },
       orderBy: [{ severity: 'desc' }, { createdAt: 'desc' }],
       take: 100,
     });
@@ -25,6 +26,7 @@ export class InboxService {
       return await this.prisma.inboxItem.update({
         where: { id },
         data: { status },
+        include: { outboundCalls: { orderBy: { createdAt: 'asc' } } },
       });
     } catch {
       throw new NotFoundException(`Inbox item ${id} not found`);

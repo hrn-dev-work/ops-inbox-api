@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InboxItem, Prisma } from '@prisma/client';
+import { OutboundService } from '../outbound/outbound.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { IngestWebhookDto } from './dto/ingest-webhook.dto';
 import { mapPayloadToInbox } from './map-payload';
@@ -20,6 +21,7 @@ export class WebhooksService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly config: ConfigService,
+    private readonly outbound: OutboundService,
   ) {}
 
   async ingest(input: {
@@ -76,6 +78,13 @@ export class WebhooksService {
             sourceEventId: event.id,
           },
         });
+      });
+
+      await this.outbound.notifyInboxCreated({
+        inboxItemId: item.id,
+        provider: item.provider,
+        title: item.title,
+        summary: item.summary,
       });
 
       return { created: true, item };

@@ -10,8 +10,8 @@ Full research run (private): https://github.com/hrn-dev-work/cursor-dotfiles/blo
 |---|---|
 | Stack | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI ([ADR 0001](./docs/adr/0001-nestjs-prisma-backend.md)) |
 | Problem | Providers retry webhooks; naive handlers create duplicate tickets |
-| Result so far | `(provider, externalId)` uniqueness + HMAC verification + Swagger |
-| S1 still open | One **outbound** mock HTTP call recorded on the inbox item |
+| Result so far | HMAC + idempotent ingest + outbound mock recorded on inbox + Swagger |
+| S1 still open | Hosted public API URL (GitHub repo is public) |
 
 Japanese: [README.ja.md](./README.ja.md)  
 Agent glossary: [CONTEXT.md](./CONTEXT.md) · Human setup: [docs/en/getting-started.md](./docs/en/getting-started.md)
@@ -30,8 +30,8 @@ SaaS tools retry the same webhook. Clients need verified ingest, no duplicate ti
 1. Verify `X-Signature-SHA256` (HMAC-SHA256 of the raw body)
 2. Idempotent upsert by `(provider, externalId)` — retries return `created: false`
 3. Map payload → `InboxItem` (title / summary / severity / status)
-4. Expose REST + OpenAPI (`/docs`)
-5. *(S1 next)* Trigger one outbound mock HTTP call and attach it to the item
+4. On first create only: record one outbound notify (`OUTBOUND_MODE=mock` by default)
+5. Expose REST + OpenAPI (`/docs`); inbox list includes `outboundCalls`
 
 **Non-goals**  
 GraphQL BFF, real third-party production API keys in the repo, marketing UI.
@@ -83,8 +83,8 @@ More detail: [docs/en/getting-started.md](./docs/en/getting-started.md)
 | Smoke tests green | Yes (local) |
 | OpenAPI `/docs` | Yes |
 | README case study | Yes (this file) |
-| Outbound mock call | **Not yet** |
-| Public URL set (hosted API + GitHub) | **Not yet** |
+| Outbound mock call | Yes (`OUTBOUND_MODE=mock`, see inbox `outboundCalls`) |
+| Public URL set (hosted API + GitHub) | GitHub yes · hosted API **Not yet** |
 
 ---
 

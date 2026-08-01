@@ -35,18 +35,33 @@ model WebhookEvent {
 }
 
 model InboxItem {
-  id            String       @id @default(cuid())
+  id            String         @id @default(cuid())
   title         String
   summary       String
-  severity      Severity     @default(MEDIUM)
-  status        InboxStatus  @default(OPEN)
+  severity      Severity       @default(MEDIUM)
+  status        InboxStatus    @default(OPEN)
   provider      String
-  sourceEventId String       @unique
-  sourceEvent   WebhookEvent @relation(fields: [sourceEventId], references: [id], onDelete: Cascade)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  sourceEventId String         @unique
+  sourceEvent   WebhookEvent   @relation(fields: [sourceEventId], references: [id], onDelete: Cascade)
+  outboundCalls OutboundCall[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 
   @@index([status, severity])
   @@index([provider, createdAt])
   @@map("inbox_items")
+}
+
+model OutboundCall {
+  id           String    @id @default(cuid())
+  inboxItemId  String
+  inboxItem    InboxItem @relation(fields: [inboxItemId], references: [id], onDelete: Cascade)
+  targetUrl    String
+  statusCode   Int
+  requestBody  Json
+  responseBody Json?
+  createdAt    DateTime  @default(now())
+
+  @@index([inboxItemId, createdAt])
+  @@map("outbound_calls")
 }

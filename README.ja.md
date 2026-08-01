@@ -11,8 +11,8 @@
 |---|---|
 | スタック | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI（[ADR 0001](./docs/adr/0001-nestjs-prisma-backend.md)） |
 | 課題 | プロバイダ再送でチケットが二重になる |
-| いまできていること | `(provider, externalId)` 冪等 + HMAC + Swagger |
-| S1 未着手 | Inbox に紐づく **outbound** モック HTTP 1本 |
+| いまできていること | HMAC + 冪等受信 + outbound モック記録 + Swagger |
+| S1 未着手 | ホストした公開 API URL（GitHub は公開済み） |
 
 English: [README.md](./README.md)  
 用語・制約: [CONTEXT.md](./CONTEXT.md) · 起動手順: [docs/ja/getting-started.md](./docs/ja/getting-started.md)
@@ -31,8 +31,8 @@ SaaS は同じ Webhook を再送する。検証・冪等・API 契約が必要�
 1. `X-Signature-SHA256` で検証（生ボディの HMAC-SHA256）
 2. `(provider, externalId)` で冪等 — 再送は `created: false`
 3. ペイロードを `InboxItem` に正規化
-4. REST + OpenAPI（`/docs`）
-5. *（S1 次）* outbound モック呼び出しを 1 回記録
+4. 初回作成時のみ outbound 通知を 1 回記録（既定 `OUTBOUND_MODE=mock`）
+5. REST + OpenAPI（`/docs`）；inbox 一覧に `outboundCalls` を含む
 
 **非目標**  
 GraphQL BFF、本番用の外部 API キーをリポに含めること、マーケ用 UI。
@@ -78,8 +78,8 @@ npm run start:dev
 | Smoke 緑 | ローカルで可 |
 | OpenAPI `/docs` | あり |
 | README ケース | あり（本ファイル） |
-| Outbound モック | **未** |
-| 公開 URL 一式 | **未** |
+| Outbound モック | あり（inbox の `outboundCalls`） |
+| 公開 URL 一式 | GitHub あり · ホスト API **未** |
 
 ---
 
