@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd /home/haruna/workspace/ops-inbox-api
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
 
 BASE_URL="${BASE_URL:-http://localhost:3000}"
 

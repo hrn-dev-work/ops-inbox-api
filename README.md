@@ -72,7 +72,7 @@ More detail: [docs/en/getting-started.md](./docs/en/getting-started.md)
 
 ## Offer blurb (EN, draft)
 
-> I build NestJS APIs for webhook and third-party integrations: HMAC verification, idempotent retries, Prisma/Postgres, and OpenAPI. Demo: this repo — ingest twice with the same `externalId` and get one inbox item.
+> I build NestJS APIs for webhook and third-party integrations: HMAC verification, idempotent retries, a recorded outbound notify, Prisma/Postgres, and OpenAPI. Demo: this repo — ingest twice with the same `externalId` and get one inbox item plus one outbound call.
 
 ---
 

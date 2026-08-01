@@ -1,6 +1,6 @@
 # ops-inbox-api
 
-NestJS portfolio sample: **idempotent webhook ingest → ops inbox**, extended toward **one outbound HTTP integration** per Research card **S1** (`extend`).
+NestJS portfolio sample: **idempotent webhook ingest → ops inbox → one outbound notify** (mock by default) per Research card **S1** (`extend`).
 
 Strategy (private GitHub): https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/portfolio-automation-strategy.md  
 Research card S1 (in-repo): [docs/en/sample-card-s1.md](docs/en/sample-card-s1.md)  
@@ -24,8 +24,8 @@ _Avoid_: exposing raw provider payloads as the primary API surface
 Logical source system name (e.g. `stripe`, `github`). Path param on ingest.
 _Avoid_: hard-coding one vendor in domain services
 
-**OutboundCall** (S1 extend target):
-Record of one mock/real HTTP call triggered after ingest (url, status, correlation to InboxItem).
+**OutboundCall**:
+Record of one mock/real HTTP call triggered after first ingest (url, status, correlation to InboxItem).
 _Avoid_: calling real third-party APIs with committed secrets
 
 **Signing secret**:
