@@ -1,25 +1,41 @@
 # Ops Inbox API
 
-Portfolio sample for backend freelance work: **signed webhook ingest → idempotent storage → ops inbox**.
+Portfolio sample for **Upwork / CrowdWorks-style** backend work: signed webhook ingest → idempotent storage → ops inbox.
+
+Aligned with Research card **S1** (`extend`):  
+`~/workspace/cursor-dotfiles/docs/en/research-runs/2026-08-01.md`
 
 | | |
 |---|---|
-| Stack | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI |
+| Stack | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI ([ADR 0001](./docs/adr/0001-nestjs-prisma-backend.md)) |
 | Problem | Providers retry webhooks; naive handlers create duplicate tickets |
-| Result | `(provider, externalId)` uniqueness + HMAC verification |
+| Result so far | `(provider, externalId)` uniqueness + HMAC verification + Swagger |
+| S1 still open | One **outbound** mock HTTP call recorded on the inbox item |
 
-Live docs: `http://localhost:3000/docs`
+Japanese: [README.ja.md](./README.ja.md)  
+Agent glossary: [CONTEXT.md](./CONTEXT.md) · Human setup: [docs/en/getting-started.md](./docs/en/getting-started.md)
 
-## Case study
+Local docs (when running): `http://localhost:3000/docs`
 
-**Challenge** — SaaS tools retry the same webhook. Clients need verified, idempotent ingest and a normalized inbox.
+---
+
+## Case study (for proposals)
+
+**Challenge**  
+SaaS tools retry the same webhook. Clients need verified ingest, no duplicate tickets, and a clear API contract.
 
 **Approach**
 
-1. Verify `X-Signature-SHA256` (HMAC-SHA256 of raw body)
-2. Upsert by `(provider, externalId)` — retries return existing item (`created: false`)
-3. Map payload → `InboxItem`
-4. REST list / status update + Swagger
+1. Verify `X-Signature-SHA256` (HMAC-SHA256 of the raw body)
+2. Idempotent upsert by `(provider, externalId)` — retries return `created: false`
+3. Map payload → `InboxItem` (title / summary / severity / status)
+4. Expose REST + OpenAPI (`/docs`)
+5. *(S1 next)* Trigger one outbound mock HTTP call and attach it to the item
+
+**Non-goals**  
+GraphQL BFF, real third-party production API keys in the repo, marketing UI.
+
+---
 
 ## Quick start
 
@@ -27,12 +43,49 @@ Live docs: `http://localhost:3000/docs`
 cp .env.example .env
 docker compose up -d db
 npm install
-npx prisma migrate dev --name init
+npx prisma migrate deploy
 npm run start:dev
 ```
 
-Health: `GET http://localhost:3000/api/v1/health`  
-Smoke: `bash scripts/smoke.sh`
+| Check | URL / command |
+|-------|----------------|
+| Health | `GET http://localhost:3000/api/v1/health` |
+| Swagger | http://localhost:3000/docs |
+| Smoke | `bash scripts/smoke.sh` |
+
+More detail: [docs/en/getting-started.md](./docs/en/getting-started.md)
+
+---
+
+## API surface
+
+| Method | Path | Purpose |
+|--------|------|---------|
+| GET | `/api/v1/health` | App + DB |
+| POST | `/api/v1/webhooks/:provider` | Signed ingest (idempotent) |
+| GET | `/api/v1/inbox` | List (`?status=&severity=`) |
+| PATCH | `/api/v1/inbox/:id` | Update status |
+| GET | `/docs` | OpenAPI UI |
+
+---
+
+## Offer blurb (EN, draft)
+
+> I build NestJS APIs for webhook and third-party integrations: HMAC verification, idempotent retries, Prisma/Postgres, and OpenAPI. Demo: this repo — ingest twice with the same `externalId` and get one inbox item.
+
+---
+
+## Status vs S1 DoD
+
+| DoD item | Status |
+|----------|--------|
+| Smoke tests green | Yes (local) |
+| OpenAPI `/docs` | Yes |
+| README case study | Yes (this file) |
+| Outbound mock call | **Not yet** |
+| Public URL set (hosted API + GitHub) | **Not yet** |
+
+---
 
 ## License
 
