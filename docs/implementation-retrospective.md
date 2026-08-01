@@ -35,5 +35,5 @@
   - `.cursorignore` の `*.sql` が `.gitignore` の migration 例外と揃っていなかった（エージェント索引漏れリスク）
   - `scripts/install-render-cli.sh` はローカル一時用のため **未コミットのまま**（意図が Blueprint 本番経路と無関係）
   - `docs/reviews/latest.md` は implementation-review 未実行のプレースホルダのまま（捏造しない）
-- **ルール更新**: 無（リポジトリ）。グローバル `wsl-agent-invoke` に `git commit -F`（PowerShell 経由 heredoc 禁止）を追記済み
+- **ルール更新**: 有 — `docs/agents/conventions.md` §5.1.1 Hosted DoD closeout（atomic）+ Ignore sync; `.cursor/rules/implementation-retrospective.mdc` checklist; グローバル `git-commit-boundary.mdc`（scratch `??` 禁止）; テンプレ `.cursorignore` に migration SQL 例外; `portfolio-conventions-audit` A5b/B5b/B8。ローカル `scripts/install-render-cli.sh` は削除
 - **次回テスト**: ホスト再デプロイ後は必ず env の秘密で smoke（ローカル既定秘密では 401）

@@ -56,6 +56,7 @@ Full detail: [security.md](./security.md).
 |---------|------------|
 | Secrets in git | Never. `.env` gitignored; `.env.example` keys / dummy values only |
 | AI context | Root [`.cursorignore`](../../.cursorignore) blocks `.env*`, keys, logs, dumps (`*.sql`/`*.csv`, …). **Shell/MCP are not blocked** — keep real secrets out of the tree |
+| Ignore sync | Keep [`.gitignore`](../../.gitignore) and [`.cursorignore`](../../.cursorignore) **exception lists aligned** (e.g. `*.sql` + `!prisma/migrations/**/*.sql`). Drift hides migration SQL from agents while git still tracks it |
 | Git ignore | [`.gitignore`](../../.gitignore) aligned for dumps/logs/keys |
 | Logging | Correlation ids only (`provider`, `externalId`, `inboxItemId`). No raw webhook `payload` / seeded email/phone in logs |
 | Seed | `npm run db:seed` → `prisma/seed.ts` + `@faker-js/faker` only. **No hardcoded PII** |
@@ -81,6 +82,22 @@ Human seed guide: [../en/local-seed.md](../en/local-seed.md).
 2. Local checks (also CI): `npm run lint` · `npm test` · `npm run secret:audit`
 3. Prisma: `npx prisma validate` when schema/migrations change
 4. Smoke (API up): `bash scripts/smoke.sh`
+
+### 5.1.1 Hosted DoD closeout (atomic)
+
+When a public URL or hosted verification status changes, **one commit** (or one PR) must update all of:
+
+| Artifact | Update |
+|----------|--------|
+| `README.md` + `README.ja.md` | DoD table + public URL row |
+| [conventions.md](./conventions.md) (this file) + `docs/en\|ja/conventions.md` | Hosted status (not “still open”) |
+| Deploy guide (`docs/en\|ja/deploy-render.md` or equivalent) | Real `BASE_URL` example; remove stale “mark DoD Yes” TODOs |
+| `docs/implementation-retrospective.md` | Evidence: health, smoke command outcome, date |
+| `CONTEXT.md` | Hosting target / live URL if the sample ships hosted |
+
+**If:** hosted smoke has not passed, **Then:** do not mark Public URL DoD **Yes**.  
+**If:** smoke needs a generated secret, **Then:** read it from the host Dashboard env — never commit it.  
+**If:** `implementation-review` was not run, **Then:** leave `docs/reviews/latest.md` as placeholder (do not invent sign-offs).
 
 ### 5.2 CI
 

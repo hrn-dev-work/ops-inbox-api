@@ -72,6 +72,8 @@ NestJS 11 · Prisma 6 · PostgreSQL 16（Docker Compose）· REST + OpenAPI。
 
 公開 URL: [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) — [deploy-render.md](./deploy-render.md)。ホスト smoke 確認済み。README DoD の公開 URL は **Yes**。
 
+公開 URL や DoD 状態を変えるときは、README・規約・デプロイ手順・CONTEXT・反省会の根拠を **同じ変更** で揃える（エージェント SSOT: [agents/conventions.md](../agents/conventions.md) §5.1.1）。
+
 ---
 
 ## 関連

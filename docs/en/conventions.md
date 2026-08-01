@@ -72,6 +72,8 @@ Reviews explainer: [reviews.md](./reviews.md)
 
 Public URL: [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) — see [deploy-render.md](./deploy-render.md). Hosted smoke verified; README DoD Public URL is **Yes**.
 
+When changing hosted URL or DoD status, update README, conventions, deploy guide, CONTEXT, and retrospective evidence in the **same** change (agent SSOT: [agents/conventions.md](../agents/conventions.md) §5.1.1).
+
 ---
 
 ## Related guides

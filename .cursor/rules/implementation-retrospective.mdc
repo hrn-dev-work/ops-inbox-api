@@ -34,8 +34,11 @@ Run **just before** finishing a code implementation task (including when a `stop
 | Coupling | Any cross-layer knowledge or concrete imports? |
 | Tests | Which ISTQB level needs new coverage? |
 | Specs | Did docs keep up with code? |
+| Hosted DoD | If public URL / smoke status changed: README EN+JA, conventions, deploy guide, CONTEXT, retrospective evidence — **same change**? |
+| Ignore sync | Did `.gitignore` / `.cursorignore` dump exceptions stay aligned (e.g. `*.sql` vs `!prisma/migrations/**/*.sql`)? |
+| Scratch files | Any `??` install/debug scripts? Delete, or commit with docs — do not leave ambiguous orphans |
 
 ## Skip
 
 - User says skip retrospective / questions only
-- No code changes (docs-only or research-only)
+- No code changes (docs-only or research-only) — still run Hosted DoD / Ignore sync rows when those files changed
