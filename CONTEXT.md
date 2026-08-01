@@ -2,8 +2,9 @@
 
 NestJS portfolio sample: **idempotent webhook ingest → ops inbox**, extended toward **one outbound HTTP integration** per Research card **S1** (`extend`).
 
-Strategy: `~/workspace/cursor-dotfiles/docs/en/portfolio-automation-strategy.md`  
-Research: `~/workspace/cursor-dotfiles/docs/en/research-runs/2026-08-01.md`
+Strategy (private GitHub): https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/portfolio-automation-strategy.md  
+Research card S1 (in-repo): [docs/en/sample-card-s1.md](docs/en/sample-card-s1.md)  
+Research run (private GitHub): https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/research-runs/2026-08-01.md
 
 **Agents:** read this file + `docs/agents/` before non-trivial work.
 

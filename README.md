@@ -3,7 +3,8 @@
 Portfolio sample for **Upwork / CrowdWorks-style** backend work: signed webhook ingest → idempotent storage → ops inbox.
 
 Aligned with Research card **S1** (`extend`):  
-`~/workspace/cursor-dotfiles/docs/en/research-runs/2026-08-01.md`
+[docs/en/sample-card-s1.md](./docs/en/sample-card-s1.md)  
+Full research run (private): https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/research-runs/2026-08-01.md
 
 | | |
 |---|---|

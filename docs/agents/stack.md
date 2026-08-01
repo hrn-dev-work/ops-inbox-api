@@ -2,7 +2,8 @@
 
 **Source of truth for agents.** Override of the machine FastAPI default — see [ADR 0001](../adr/0001-nestjs-prisma-backend.md).
 
-Research card **S1** (`extend`): `~/workspace/cursor-dotfiles/docs/en/research-runs/2026-08-01.md`
+Research card **S1** (`extend`): [sample-card-s1.md](../en/sample-card-s1.md)  
+Full run: https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/research-runs/2026-08-01.md
 
 ## Choices
 

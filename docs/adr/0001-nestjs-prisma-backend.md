@@ -8,7 +8,7 @@ Accepted — 2026-08-01
 
 Global `default-stack` prefers FastAPI + Next.js. This repository is a **freelance portfolio sample** aligned with Research card **S1** (NestJS webhook + OpenAPI + optional outbound call) for Upwork/CrowdWorks API-integration jobs.
 
-Evidence: `cursor-dotfiles/docs/en/research-runs/2026-08-01.md` (Nest/OpenAPI and webhook/idempotency patterns in market briefs).
+Evidence: https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/research-runs/2026-08-01.md (and in-repo [sample-card-s1.md](../en/sample-card-s1.md)).
 
 ## Decision
 

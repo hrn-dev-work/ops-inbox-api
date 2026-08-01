@@ -4,7 +4,8 @@
 署名付き Webhook 受信 → 冪等保存 → Ops Inbox。
 
 調査カード **S1**（`extend`）に対応:  
-`~/workspace/cursor-dotfiles/docs/ja/research-runs/2026-08-01.md`
+[docs/ja/sample-card-s1.md](./docs/ja/sample-card-s1.md)  
+調査ラン全文（private）: https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/ja/research-runs/2026-08-01.md
 
 | | |
 |---|---|
