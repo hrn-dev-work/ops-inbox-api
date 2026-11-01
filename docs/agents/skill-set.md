@@ -1,6 +1,6 @@
 # Skill set (agents)
 
-**English only.** Human-facing skill tables: both halves of [README.md](../../README.md) (EN top / JA bottom). Optional stub: [README.ja.md](../../README.ja.md).
+**English only.** Human-facing skill tables: [README.md](../../README.md) (English) and [README.ja.md](../../README.ja.md) (Japanese), with language links at the top of both files.
 Stack SSOT: [stack.md](./stack.md). Consolidated conventions: [conventions.md](./conventions.md).  
 Routing: `.cursor/rules/project-entry.mdc` + `~/.cursor/rules/global-agent-routing.mdc`.
 
@@ -32,7 +32,7 @@ Aligned with Research card **S1** and the public README skill table.
 
 | Skill | When |
 |-------|------|
-| `docs-language` | README.md EN top + JA bottom; `docs/en|ja` one locale; this directory stays English |
+| `docs-language` | README.md (English) + README.ja.md (Japanese), with top language links; `docs/en|ja` one locale; this directory stays English |
 | `wsl-agent-invoke` | Shell, git, gh on `\\wsl.localhost\` / WSL Ubuntu workspace |
 | `bootstrap-project-foundation` | Missing `CONTEXT.md` or `project-entry.mdc` (hook may already have run) |
 | `agent-session-closeout` | Substantial work finished (impl / docs / Git·PR) |
@@ -89,7 +89,7 @@ Do not disable the user-level `sessionStart` hook unless the user asks; side eff
 ## E. Maintenance
 
 - When conventions change: update [conventions.md](./conventions.md) and human mirrors `docs/en|ja/conventions.md` in the same change.
-- Sample skill rows change when shipped features or S1 DoD change — update **this file** and both halves of `README.md` together (`docs-language`).
+- Sample skill rows change when shipped features or S1 DoD change — update **this file** and both `README.md` and `README.ja.md` together (`docs-language`).
 - Agent skill/rule rows change when `project-entry` or global routing changes — keep this file aligned with those tables (do not fork conflicting guidance).
 - Pre-commit quality gate: run **implementation-review** (`.cursor/rules/implementation-review.mdc`) → `docs/reviews/latest.md`.
 - CI gate: `.github/workflows/ci.yml` (`secret-audit` → lint + test).
