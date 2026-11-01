@@ -1,120 +1,115 @@
-# Ops Inbox API
+# Ops Inbox API（日本語）
 
-[English](./README.md) | [日本語](./README.ja.md)
+[![日本語](https://img.shields.io/badge/%E6%97%A5%E6%9C%AC%E8%AA%9E-0969da?style=for-the-badge)](./README.md) [![English](https://img.shields.io/badge/English-57606a?style=for-the-badge)](./README.en.md)
 
-Portfolio sample for **Upwork / CrowdWorks-style** backend work: signed webhook ingest → idempotent storage → ops inbox.
+**Upwork / クラウドワークス向け**のバックエンド・ポートフォリオ用サンプルです。\
+署名付き Webhook 受信 → 冪等保存 → Ops Inbox。
 
-Aligned with Research card **S1** (`extend`):  
-[docs/en/sample-card-s1.md](./docs/en/sample-card-s1.md)  
-Full research run (private): https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/en/research-runs/2026-08-01.md
+調査カード **S1**（`extend`）に対応:\
+[docs/ja/sample-card-s1.md](./docs/ja/sample-card-s1.md)\
+調査ラン全文（private）: https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/ja/research-runs/2026-08-01.md
 
 | | |
 |---|---|
-| Stack | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI ([ADR 0001](./docs/adr/0001-nestjs-prisma-backend.md)) |
-| Problem | Providers retry webhooks; naive handlers create duplicate tickets |
-| Result so far | HMAC + idempotent ingest + outbound mock + Swagger + hosted API |
-| Public API | [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) ([/docs](https://ops-inbox-api.onrender.com/docs)) — Render; deploy: [docs/en/deploy-render.md](./docs/en/deploy-render.md) |
+| スタック | NestJS 11 · Prisma 6 · PostgreSQL 16 · OpenAPI（[ADR 0001](./docs/adr/0001-nestjs-prisma-backend.md)） |
+| 課題 | プロバイダ再送でチケットが二重になる |
+| いまできていること | HMAC + 冪等受信 + outbound モック + Swagger + ホスト API |
+| 公開 API | [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com)（[/docs](https://ops-inbox-api.onrender.com/docs)）— Render · [docs/ja/deploy-render.md](./docs/ja/deploy-render.md) |
 
-Why this repo: [docs/en/purpose.md](./docs/en/purpose.md) · Agent glossary: [CONTEXT.md](./CONTEXT.md) · Conventions: [docs/en/conventions.md](./docs/en/conventions.md) · Human setup: [docs/en/getting-started.md](./docs/en/getting-started.md)
+目的: [docs/ja/purpose.md](./docs/ja/purpose.md) · 用語・制約: [CONTEXT.md](./CONTEXT.md) · 規約: [docs/ja/conventions.md](./docs/ja/conventions.md) · 起動手順: [docs/ja/getting-started.md](./docs/ja/getting-started.md)
 
-Local docs: `http://localhost:3000/docs` · Hosted: [https://ops-inbox-api.onrender.com/docs](https://ops-inbox-api.onrender.com/docs)
-
----
-
-## Case study (for proposals)
-
-**Challenge**  
-SaaS tools retry the same webhook. Clients need verified ingest, no duplicate tickets, and a clear API contract.
-
-**Approach**
-
-1. Verify `X-Signature-SHA256` (HMAC-SHA256 of the raw body)
-2. Idempotent upsert by `(provider, externalId)` — retries return `created: false`
-3. Map payload → `InboxItem` (title / summary / severity / status)
-4. On first create only: record one outbound notify (`OUTBOUND_MODE=mock` by default)
-5. Expose REST + OpenAPI (`/docs`); inbox list includes `outboundCalls`
-
-**Non-goals**  
-GraphQL BFF, real third-party production API keys in the repo, marketing UI.
+ローカル docs: `http://localhost:3000/docs` · ホスト: [https://ops-inbox-api.onrender.com/docs](https://ops-inbox-api.onrender.com/docs)
 
 ---
 
-## Quick start
+## ケーススタディ（応募文用）
+
+**課題**\
+SaaS は同じ Webhook を再送する。検証・冪等・API 契約が必要。
+
+**方針**
+
+1. `X-Signature-SHA256` で検証（生ボディの HMAC-SHA256）
+2. `(provider, externalId)` で冪等 — 再送は `created: false`
+3. ペイロードを `InboxItem` に正規化
+4. 初回作成時のみ outbound 通知を 1 回記録（既定 `OUTBOUND_MODE=mock`）
+5. REST + OpenAPI（`/docs`）；inbox 一覧に `outboundCalls` を含む
+
+**非目標**\
+GraphQL BFF、本番用の外部 API キーをリポに含めること、マーケ用 UI。
+
+---
+
+## クイックスタート
 
 ```bash
 cp .env.example .env
 docker compose up -d db
 npm install
 npx prisma migrate deploy
-npm run db:seed   # optional Faker demo data
+npm run db:seed   # 任意: Faker デモデータ
 npm run start:dev
 ```
 
-| Check | URL / command |
-|-------|----------------|
+| 確認 | URL / コマンド |
+|------|----------------|
 | Health | `GET http://localhost:3000/api/v1/health` |
 | Swagger | http://localhost:3000/docs |
 | Smoke | `bash scripts/smoke.sh` |
-| Seed | `npm run db:seed` ([docs/en/local-seed.md](./docs/en/local-seed.md)) |
+| Seed | `npm run db:seed`（[docs/ja/local-seed.md](./docs/ja/local-seed.md)） |
 | Secret audit | `npm run secret:audit` |
-| CI | `.github/workflows/ci.yml` (`secret-audit` → lint + test) |
+| CI | `.github/workflows/ci.yml`（`secret-audit` → lint + test） |
 
-More detail: [docs/en/getting-started.md](./docs/en/getting-started.md)
+詳細: [docs/ja/getting-started.md](./docs/ja/getting-started.md)
 
 ---
 
-## API surface
+## API
 
-| Method | Path | Purpose |
-|--------|------|---------|
-| GET | `/api/v1/health` | App + DB |
-| POST | `/api/v1/webhooks/:provider` | Signed ingest (idempotent) |
-| GET | `/api/v1/inbox` | List (`?status=&severity=`) |
-| PATCH | `/api/v1/inbox/:id` | Update status |
+| Method | Path | 用途 |
+|--------|------|------|
+| GET | `/api/v1/health` | アプリ + DB |
+| POST | `/api/v1/webhooks/:provider` | 署名付き受信（冪等） |
+| GET | `/api/v1/inbox` | 一覧 |
+| PATCH | `/api/v1/inbox/:id` | ステータス更新 |
 | GET | `/docs` | OpenAPI UI |
 
 ---
 
-## Offer blurb (EN, draft)
+## スキルセット
 
-> I build NestJS APIs for webhook and third-party integrations: HMAC verification, idempotent retries, a recorded outbound notify, Prisma/Postgres, and OpenAPI. Demo: this repo — ingest twice with the same `externalId` and get one inbox item plus one outbound call.
+このサンプルが示すスキル（調査カード **S1**・[docs/agents/stack.md](./docs/agents/stack.md) に準拠）。
 
----
-
-## Skill set
-
-Skills this sample demonstrates (aligned with Research card **S1** and [docs/agents/stack.md](./docs/agents/stack.md)).
-
-| Area | Skills |
+| 領域 | スキル |
 |------|--------|
-| Backend | NestJS 11 · TypeScript (strict) · modular Nest architecture |
-| API | REST `/api/v1` · OpenAPI / Swagger (`/docs`) · DTO validation (`class-validator`) |
-| Data | PostgreSQL 16 · Prisma 6 · migrations · unique constraint idempotency |
-| Integrations | HMAC-SHA256 webhook verify · idempotent ingest `(provider, externalId)` · outbound HTTP notify (mock by default) |
-| Domain | Webhook → Inbox normalization · severity / status lifecycle |
-| Quality | Jest unit tests · `scripts/smoke.sh` · health + DB ping · `scripts/secret-audit.sh` |
-| Local ops | Docker Compose Postgres · `.env` / `.env.example` · `.cursorignore` · Faker seed (local-host guard) |
+| バックエンド | NestJS 11 · TypeScript（strict）· Nest モジュール構成 |
+| API | REST `/api/v1` · OpenAPI / Swagger（`/docs`）· DTO バリデーション（`class-validator`） |
+| データ | PostgreSQL 16 · Prisma 6 · マイグレーション · unique 制約による冪等 |
+| 連携 | HMAC-SHA256 Webhook 検証 · `(provider, externalId)` 冪等受信 · outbound HTTP 通知（既定はモック） |
+| ドメイン | Webhook → Inbox 正規化 · severity / status ライフサイクル |
+| 品質 | Jest 単体テスト · `scripts/smoke.sh` · health + DB ping · `scripts/secret-audit.sh` |
+| ローカル運用 | Docker Compose の Postgres · `.env` / `.env.example` · `.cursorignore` · Faker seed（ローカルホストガード） |
 
-**Research tags (S1):** `nestjs` · `prisma` · `rest-api` · `openapi` · `webhook` · `outbound-integration` · `testing`
+**調査タグ（S1）:** `nestjs` · `prisma` · `rest-api` · `openapi` · `webhook` · `outbound-integration` · `testing`
 
-**Not in scope for this sample:** GraphQL BFF · React/Next UI · Redis · real third-party production credentials
+**このサンプルの非対象:** GraphQL BFF · React/Next UI · Redis · 本番用の外部 API 認証情報
 
-Agent skills / rules / hooks used when working this repo: [docs/agents/skill-set.md](./docs/agents/skill-set.md) (English, agents only).  
-Full conventions handbook: [docs/en/conventions.md](./docs/en/conventions.md) · agents: [docs/agents/conventions.md](./docs/agents/conventions.md).
+このリポ作業時のエージェント用スキル／ルール／hooks 一覧: [docs/agents/skill-set.md](./docs/agents/skill-set.md)（英語・エージェント向け）。\
+規約ハンドブック: [docs/ja/conventions.md](./docs/ja/conventions.md) · エージェント正本: [docs/agents/conventions.md](./docs/agents/conventions.md)。
 
-Pre-commit gate: ask the agent to run **implementation-review** (writes [docs/reviews/latest.md](./docs/reviews/latest.md)).
+コミット前ゲート: エージェントに **implementation-review** を実行させる（[docs/reviews/latest.md](./docs/reviews/latest.md) に出力）。
 
 ---
 
-## Status vs S1 DoD
+## S1 DoD との差分
 
-| DoD item | Status |
-|----------|--------|
-| Smoke tests green | Yes (local + hosted) |
-| OpenAPI `/docs` | Yes (local + [hosted](https://ops-inbox-api.onrender.com/docs)) |
-| README case study | Yes (this file) |
-| Outbound mock call | Yes (`OUTBOUND_MODE=mock`, see inbox `outboundCalls`) |
-| Public URL set (hosted API + GitHub) | Yes — [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) · GitHub yes |
+| 項目 | 状態 |
+|------|------|
+| Smoke 緑 | Yes（ローカル + ホスト） |
+| OpenAPI `/docs` | あり（ローカル + [ホスト](https://ops-inbox-api.onrender.com/docs)） |
+| README ケース | あり（本ファイル） |
+| Outbound モック | あり（inbox の `outboundCalls`） |
+| 公開 URL 一式 | Yes — [https://ops-inbox-api.onrender.com](https://ops-inbox-api.onrender.com) · GitHub あり |
 
 ---
 

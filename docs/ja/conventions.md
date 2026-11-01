@@ -9,9 +9,9 @@
 
 ## ドキュメント言語
 
-- `README.md` + `docs/en/` → 英語のみ  
-- `README.ja.md` + `docs/ja/` → 日本語のみ  
-- エージェント向け（`CONTEXT.md`、`docs/agents/`、ADR、Cursor rules）→ 英語のみ  
+- `README.en.md` + `docs/en/` → 英語のみ
+- `README.md` + `docs/ja/` → 日本語のみ
+- エージェント向け（`CONTEXT.md`、`docs/agents/`、ADR、Cursor rules）→ 英語のみ
 - 同一ファイルに英日を混ぜない
 
 ---
@@ -62,7 +62,7 @@ NestJS 11 · Prisma 6 · PostgreSQL 16（Docker Compose）· REST + OpenAPI。
 
 ## スキル・エージェント経路
 
-- 人向けスキル表: [README.ja.md](../../README.ja.md) のスキルセット節  
+- 人向けスキル表: [README.md](../../README.md) のスキルセット節
 - エージェント一覧: [agents/skill-set.md](../agents/skill-set.md)  
 - Cursor ルーター: `.cursor/rules/project-entry.mdc`
 

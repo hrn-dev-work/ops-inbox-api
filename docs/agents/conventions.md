@@ -11,8 +11,8 @@ This file consolidates **all** standing conventions for this repository — incl
 | Audience | Where | Language |
 |----------|-------|----------|
 | Agents (Cursor, Gemini, …) | `CONTEXT.md`, `docs/agents/*`, `docs/adr/*`, `.cursor/rules/*` | **English only** |
-| Humans (EN) | `README.md`, `docs/en/*` | English only |
-| Humans (JA) | `README.ja.md`, `docs/ja/*` | Japanese only |
+| Humans (EN) | `README.en.md`, `docs/en/*` | English only |
+| Humans (JA) | `README.md`, `docs/ja/*` | Japanese only |
 
 - One locale per file. Never EN + JA in the same markdown file.
 - Same topic ⇒ parallel paths (`docs/en/foo.md` ↔ `docs/ja/foo.md`).
@@ -89,7 +89,7 @@ When a public URL or hosted verification status changes, **one commit** (or one 
 
 | Artifact | Update |
 |----------|--------|
-| `README.md` + `README.ja.md` | DoD table + public URL row |
+| `README.md` + `README.en.md` | DoD table + public URL row |
 | [conventions.md](./conventions.md) (this file) + `docs/en\|ja/conventions.md` | Hosted status (not “still open”) |
 | Deploy guide (`docs/en\|ja/deploy-render.md` or equivalent) | Real `BASE_URL` example; remove stale “mark DoD Yes” TODOs |
 | `docs/implementation-retrospective.md` | Evidence: health, smoke command outcome, date |
@@ -142,8 +142,8 @@ Inventory: [skill-set.md](./skill-set.md). Router: `.cursor/rules/project-entry.
 
 | Surface | Convention |
 |---------|------------|
-| Skill tables | README.md + README.ja.md **and** [skill-set.md](./skill-set.md) stay aligned |
-| Case study / offer blurb | README (EN) · README.ja.md (JA) |
+| Skill tables | README.md + README.en.md **and** [skill-set.md](./skill-set.md) stay aligned |
+| Case study / offer blurb | README.en.md (EN) · README.md (JA) |
 | S1 card | [../en/sample-card-s1.md](../en/sample-card-s1.md) |
 | Reviews how-to | [../en/reviews.md](../en/reviews.md) |
 | Getting started | [../en/getting-started.md](../en/getting-started.md) |

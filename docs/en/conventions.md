@@ -9,9 +9,9 @@ This page summarizes how we work in **ops-inbox-api**, including recent safety a
 
 ## Documentation language
 
-- `README.md` + `docs/en/` → English only  
-- `README.ja.md` + `docs/ja/` → Japanese only  
-- Agent files (`CONTEXT.md`, `docs/agents/`, ADRs, Cursor rules) → English only  
+- `README.en.md` + `docs/en/` → English only
+- `README.md` + `docs/ja/` → Japanese only
+- Agent files (`CONTEXT.md`, `docs/agents/`, ADRs, Cursor rules) → English only
 - Never mix EN and JA in one file
 
 ---
@@ -62,7 +62,7 @@ Reviews explainer: [reviews.md](./reviews.md)
 
 ## Skills & agent routing
 
-- Human skill table: [README.md](../../README.md) § Skill set  
+- Human skill table: [README.en.md](../../README.en.md) § Skill set
 - Agent inventory: [agents/skill-set.md](../agents/skill-set.md)  
 - Cursor router: `.cursor/rules/project-entry.mdc`
 
