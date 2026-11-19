@@ -2,6 +2,8 @@
 
 [![日本語](https://img.shields.io/badge/%E6%97%A5%E6%9C%AC%E8%AA%9E-57606a?style=for-the-badge)](./README.md) [![English](https://img.shields.io/badge/English-0969da?style=for-the-badge)](./README.en.md)
 
+When a notice is sent twice, the inbox still has one item. It is a sample. It does not connect to a real customer's paid account.
+
 Portfolio sample for **Upwork / CrowdWorks-style** backend work: signed webhook ingest → idempotent storage → ops inbox.
 
 Aligned with Research card **S1** (`extend`):  
@@ -75,9 +77,9 @@ More detail: [docs/en/getting-started.md](./docs/en/getting-started.md)
 
 ---
 
-## Offer blurb (EN, draft)
+## Offer blurb
 
-> I build NestJS APIs for webhook and third-party integrations: HMAC verification, idempotent retries, a recorded outbound notify, Prisma/Postgres, and OpenAPI. Demo: this repo — ingest twice with the same `externalId` and get one inbox item plus one outbound call.
+This sample shows a NestJS API for webhook and third-party integrations: HMAC verification, idempotent retries, a recorded outbound notify, Prisma/Postgres, and OpenAPI. Ingest twice with the same `externalId` and the result is one inbox item plus one outbound call.
 
 ---
 

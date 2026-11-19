@@ -2,11 +2,12 @@
 
 [![日本語](https://img.shields.io/badge/%E6%97%A5%E6%9C%AC%E8%AA%9E-0969da?style=for-the-badge)](./README.md) [![English](https://img.shields.io/badge/English-57606a?style=for-the-badge)](./README.en.md)
 
-**Upwork / クラウドワークス向け**のバックエンド・ポートフォリオ用サンプルです。\
-署名付き Webhook 受信 → 冪等保存 → Ops Inbox。
+通知を2回送っても、受信箱の項目は1件のままです。これは見本です。実在の顧客の有料アカウントには接続しません。
 
-調査カード **S1**（`extend`）に対応:\
-[docs/ja/sample-card-s1.md](./docs/ja/sample-card-s1.md)\
+**Upwork / クラウドワークス向け**のバックエンド・ポートフォリオ用サンプルです。署名付き Webhook 受信 → 冪等保存 → Ops Inbox。
+
+調査カード **S1**（`extend`）に対応: [docs/ja/sample-card-s1.md](./docs/ja/sample-card-s1.md)
+
 調査ラン全文（private）: https://github.com/hrn-dev-work/cursor-dotfiles/blob/main/docs/ja/research-runs/2026-08-01.md
 
 | | |
@@ -24,7 +25,8 @@
 
 ## ケーススタディ（応募文用）
 
-**課題**\
+**課題**
+
 SaaS は同じ Webhook を再送する。検証・冪等・API 契約が必要。
 
 **方針**
@@ -35,7 +37,8 @@ SaaS は同じ Webhook を再送する。検証・冪等・API 契約が必要�
 4. 初回作成時のみ outbound 通知を 1 回記録（既定 `OUTBOUND_MODE=mock`）
 5. REST + OpenAPI（`/docs`）；inbox 一覧に `outboundCalls` を含む
 
-**非目標**\
+**非目標**
+
 GraphQL BFF、本番用の外部 API キーをリポに含めること、マーケ用 UI。
 
 ---
@@ -76,6 +79,12 @@ npm run start:dev
 
 ---
 
+## 応募用の短い説明
+
+この見本が示すのは、Webhook と外部サービス連携のための NestJS API です。HMAC 検証、再送の冪等、記録される outbound 通知、Prisma/Postgres、OpenAPI を含みます。同じ `externalId` で2回受信すると、受信箱の項目は1件、outbound 呼び出しは1件です。
+
+---
+
 ## スキルセット
 
 このサンプルが示すスキル（調査カード **S1**・[docs/agents/stack.md](./docs/agents/stack.md) に準拠）。
@@ -94,8 +103,7 @@ npm run start:dev
 
 **このサンプルの非対象:** GraphQL BFF · React/Next UI · Redis · 本番用の外部 API 認証情報
 
-このリポ作業時のエージェント用スキル／ルール／hooks 一覧: [docs/agents/skill-set.md](./docs/agents/skill-set.md)（英語・エージェント向け）。\
-規約ハンドブック: [docs/ja/conventions.md](./docs/ja/conventions.md) · エージェント正本: [docs/agents/conventions.md](./docs/agents/conventions.md)。
+このリポ作業時のエージェント用スキル／ルール／hooks 一覧: [docs/agents/skill-set.md](./docs/agents/skill-set.md)（英語・エージェント向け）。規約ハンドブック: [docs/ja/conventions.md](./docs/ja/conventions.md) · エージェント正本: [docs/agents/conventions.md](./docs/agents/conventions.md)。
 
 コミット前ゲート: エージェントに **implementation-review** を実行させる（[docs/reviews/latest.md](./docs/reviews/latest.md) に出力）。
 
@@ -113,6 +121,6 @@ npm run start:dev
 
 ---
 
-## License
+## ライセンス
 
 MIT
